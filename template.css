@@ -3,6 +3,8 @@
     --dark-background-colour: black;
     --dark-text-colour: white;
 
+    --light-background-colour: white;
+    --light-text-colour: black;
 
     /*can use variables for fonts too*/
     --main-font: 'Arial',sans-serif;
@@ -12,4 +14,20 @@
 body {
     background-color: var(--dark-background-colour);
     color: var(--dark-text-colour);
+}
+
+/*media query for light and dark mode based on users browser preference settings*/
+@media (prefers-color-scheme: dark){
+    /*dark mode css here*/
+    body {
+        background-color: var(--dark-background-colour);
+        color: var(--dark-text-colour);
+    }
+}
+@media (prefers-color-scheme: light){
+    /*light mode css here*/
+    body {
+        background-color: var(--light-background-colour);
+        color: var(--light-text-colour);
+    }
 }
