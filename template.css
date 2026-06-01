@@ -1,0 +1,15 @@
+:root {
+    /*variables allow easy site wide changing of colour scheme and fonts*/
+    --dark-background-colour: black;
+    --dark-text-colour: white;
+
+
+    /*can use variables for fonts too*/
+    --main-font: 'Arial',sans-serif;
+}
+
+/*example using variables to set body colours to dark mode*/
+body {
+    background-color: var(--dark-background-colour);
+    color: var(--dark-text-colour);
+}
