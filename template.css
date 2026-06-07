@@ -2,13 +2,16 @@
     /*variables allow easy site wide changing of colour scheme and fonts*/
     --dark-background-colour: black;
     --dark-text-colour: white;
+    --dark-accent-colour:#27AAE0;
 
     --light-background-colour: white;
     --light-text-colour: black;
+    --light-accent-colour:#2B3891;
 
     /*current variables*/
     --background-colour:var(--light-background-colour) ;
     --text-colour:var(--light-text-colour);
+    --accent-colour:var(--light-accent-colour);
 
     /*can use variables for fonts too*/
     --main-font: 'Arial',sans-serif;
@@ -20,6 +23,7 @@
     :root{
         --background-colour:var(--dark-background-colour);
         --text-colour:var(--dark-text-colour);
+        --accent-colour:var(--dark-accent-colour);
     }
 }
 @media (prefers-color-scheme: light){
@@ -27,6 +31,7 @@
     :root{
         --background-colour:var(--light-background-colour);
         --text-colour:var(--light-text-colour);
+        --accent-colour:var(--light-accent-colour);
     }
 }
 
@@ -34,4 +39,56 @@
 body {
     background-color: var(--background-colour);
     color: var(--text-colour);
+}
+header{
+    text-align: center;
+}
+header p{
+    display: inline;
+}
+header button{
+    display: inline;
+}
+
+main{
+    margin: 50px 0px;
+}
+
+/*CSS element designing*/
+nav ul{
+    display: flex;
+    justify-content: space-around;
+
+    padding: 0;
+    list-style-type: none;
+}
+nav ul li{
+    flex: 1;
+
+    text-align: center;
+}
+nav ul li a{
+    color: var(--accent-colour);
+}
+
+/*footer centered and coloured*/
+footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+footer nav{
+    display: flex;
+
+    width: 50%;
+}
+footer nav a{
+    flex: 1;
+
+    text-align: center;
+    color: var(--accent-colour);
+}
+
+footer p{
+    margin: 3px;
 }
