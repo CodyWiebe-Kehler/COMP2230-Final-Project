@@ -6,28 +6,32 @@
     --light-background-colour: white;
     --light-text-colour: black;
 
+    /*current variables*/
+    --background-colour:var(--light-background-colour) ;
+    --text-colour:var(--light-text-colour);
+
     /*can use variables for fonts too*/
     --main-font: 'Arial',sans-serif;
 }
 
-/*example using variables to set body colours to dark mode*/
-body {
-    background-color: var(--dark-background-colour);
-    color: var(--dark-text-colour);
-}
-
 /*media query for light and dark mode based on users browser preference settings*/
 @media (prefers-color-scheme: dark){
-    /*dark mode css here*/
-    body {
-        background-color: var(--dark-background-colour);
-        color: var(--dark-text-colour);
+    /*sets current colour variables to the dark mode ones*/
+    :root{
+        --background-colour:var(--dark-background-colour);
+        --text-colour:var(--dark-text-colour);
     }
 }
 @media (prefers-color-scheme: light){
-    /*light mode css here*/
-    body {
-        background-color: var(--light-background-colour);
-        color: var(--light-text-colour);
+    /*sets current colour variables to the light mode ones*/
+    :root{
+        --background-colour:var(--light-background-colour);
+        --text-colour:var(--light-text-colour);
     }
+}
+
+/*apply currently selected colours*/
+body {
+    background-color: var(--background-colour);
+    color: var(--text-colour);
 }
