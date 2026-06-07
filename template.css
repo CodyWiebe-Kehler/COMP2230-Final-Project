@@ -40,6 +40,8 @@ body {
     background-color: var(--background-colour);
     color: var(--text-colour);
 }
+
+/*centers header, and puts theme button beside text*/
 header{
     text-align: center;
 }
@@ -50,11 +52,12 @@ header button{
     display: inline;
 }
 
+/*seperates main page content a bit from navbar and footer*/
 main{
     margin: 50px 0px;
 }
 
-/*CSS element designing*/
+/*centers and spaces out nav links*/
 nav ul{
     display: flex;
     justify-content: space-around;
@@ -71,7 +74,7 @@ nav ul li a{
     color: var(--accent-colour);
 }
 
-/*footer centered and coloured*/
+/*footer centered, coloured, and compacted a bit*/
 footer{
     display: flex;
     flex-direction: column;
@@ -88,7 +91,6 @@ footer nav a{
     text-align: center;
     color: var(--accent-colour);
 }
-
 footer p{
     margin: 3px;
 }
