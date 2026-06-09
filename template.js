@@ -134,3 +134,4 @@ window.addEventListener("resize", () => {
         menuButton.textContent = "☰ Menu";
     }
 });
+}
