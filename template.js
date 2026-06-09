@@ -97,3 +97,41 @@ function updateThemeColours(){
         document.documentElement.style.setProperty('--accent-colour','var(--dark-accent-colour)');
     }
 }
+
+// ==========================
+// Navigation Menu Toggle
+// ==========================
+const menuButton = document.createElement("button");
+menuButton.textContent = "☰ Menu";
+menuButton.classList.add("menu-btn");
+
+// Insert button before navigation
+const nav = document.querySelector(".site-nav");
+nav.parentNode.insertBefore(menuButton, nav);
+
+// Hide navigation by default on small screens
+if (window.innerWidth <= 768) {
+    nav.style.display = "none";
+}
+
+// Toggle navigation visibility
+menuButton.addEventListener("click", () => {
+    if (nav.style.display === "none") {
+        nav.style.display = "block";
+        menuButton.textContent = "✖ Close";
+    } else {
+        nav.style.display = "none";
+        menuButton.textContent = "☰ Menu";
+    }
+});
+
+// Handle screen resizing
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+        nav.style.display = "block";
+    } else {
+        nav.style.display = "none";
+        menuButton.textContent = "☰ Menu";
+    }
+});
+}
