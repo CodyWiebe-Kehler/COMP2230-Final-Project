@@ -1,0 +1,27 @@
+/*form input arrangements*/
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#simple-input-fieldset{
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 0;
+    width: 90%;
+}
+#centered-input-fieldset{
+    text-align: center;
+    border-top: 0;
+    width: 90%;
+}
+#message-input-container{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+@media (max-width:768px) {
+    #simple-input-fieldset{
+        flex-direction: column;
+    }
+}

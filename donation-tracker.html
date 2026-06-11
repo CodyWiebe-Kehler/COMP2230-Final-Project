@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PiXELL River Financial - Template</title>
+    <title>PiXELL River Financial - Donation Tracker</title>
     <link rel="stylesheet" href="template.css">
     <link rel="stylesheet" href="donation-tracker.css">
 </head>
 
 <body>
     <header class="site-header">
-        <h1>PRF: Community Support Tracker</h1>
+        <h1>PRF: Donation Tracker</h1>
         <p>This tool will help us monitor and manage our various community support initiatives</p>
     </header>
     <nav class="site-nav">
@@ -24,22 +24,28 @@
     <main>
         <section>
             <form action="submit" id="donation-tracker-form">
-                <div class="single-input-container">
-                    <label for="charity-name-input">Chosen Charity</label>
-                    <input type="text" id="charity-name-input" name="charity-name-input">
-                </div>
-                <div class="single-input-container">
-                    <label for="">Amount (USD):</label>
-                    <input type="number" id="amount-input" name="amount-input" min="0" step="0.01" placeholder="0.00">
-                </div>
-                <div class="single-input-container">
-                    <label for="date-input">Donation Date</label>
-                    <input type="date" id="date-input" name="date-input">
-                </div>
-                <div class="single-input-container" id="message-input-container">
-                    <label for="message-input">Donation Message</label>
-                    <textarea name="message-input" id="message-input" rows="4" cols="50"></textarea>
-                </div>
+                <fieldset id="simple-input-fieldset">
+                    <div class="single-input-container" id="charity-name-input-container">
+                        <label for="charity-name-input">Chosen Charity</label>
+                        <input type="text" id="charity-name-input" name="charity-name-input">
+                    </div>
+                    <div class="single-input-container" id="amount-input-container">
+                        <label for="">Amount (USD):</label>
+                        <input type="number" id="amount-input" name="amount-input" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="single-input-container" id="date-input-container">
+                        <label for="date-input">Donation Date</label>
+                        <input type="date" id="date-input" name="date-input">
+                    </div>
+                </fieldset>
+                <fieldset id="centered-input-fieldset">
+                    <div class="single-input-container" id="message-input-container">
+                        <label for="message-input">Donation Message</label>
+                        <textarea name="message-input" id="message-input"></textarea>
+                    </div>
+                    <input type="submit" name="submit-button" id="submit-button" value="Make Donation">
+                </fieldset>
+                
             </form>
         </section>
     </main>
