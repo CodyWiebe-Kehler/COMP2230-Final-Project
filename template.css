@@ -105,6 +105,17 @@ footer p{
     top: 3px;
 }
 
+/**/
+nav{
+    background-color: var(--text-on-colour);
+    padding: 5px 0px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+main section{
+    background-color: var(--text-on-colour);
+}
+
 /*hide nav toggle on desktop*/
 .menu-btn{
     display: none;
