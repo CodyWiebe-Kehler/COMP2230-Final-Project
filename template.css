@@ -98,3 +98,20 @@ footer nav a{
 footer p{
     margin: 3px;
 }
+
+.theme-btn{
+    position: absolute;
+    right: 5px;
+    top: 3px;
+}
+
+/*hide nav toggle on desktop*/
+.menu-btn{
+    display: none;
+}
+
+@media (max-width:768px) {
+    .menu-btn{
+        display: inline;
+    }
+}
