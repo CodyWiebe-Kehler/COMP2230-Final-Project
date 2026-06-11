@@ -147,3 +147,17 @@ button:hover{
     color:white;
 }
 
+/* RESPONSIVE */
+@media (max-width:768px){
+    .nav-list{
+        flex-direction: column;
+        gap: 15px;
+    }
+    .form-grid{
+        grid-template-columns: 1fr;
+    }
+    .footer-links{
+        flex-direction: column;
+        gap: 10px;
+    }
+}
