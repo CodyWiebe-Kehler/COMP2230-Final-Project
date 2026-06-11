@@ -1,0 +1,149 @@
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* BODY */
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6fa;
+    color:#333;
+}
+
+/* HEADER */
+
+.site-header{
+    background:#1e3a8a;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+.site-header p{
+    margin-top:10px;
+}
+
+/* NAVIGATION */
+/* NAVIGATION */
+
+.site-nav{
+    background: #111827;
+    padding: 15px;
+}
+
+.nav-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+}
+
+.nav-list a{
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-list a:hover{
+    color: #60a5fa;
+}
+
+/* MAIN */
+
+.container{
+    width:90%;
+    max-width:1000px;
+    margin:30px auto;
+}
+
+/* FORM */
+
+.form-section{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.form-section h2{
+    margin-bottom:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+label{
+    margin-bottom:8px;
+    font-weight:bold;
+}
+input{
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+button{
+    margin-top:25px;
+    padding:12px 20px;
+    border:none;
+    border-radius:6px;
+    background:#1e3a8a;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#2848a7;
+}
+
+/* ENTRIES */
+.entries-section{
+    margin-top:30px;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.entry{
+    padding:15px;
+    border-bottom:1px solid #ddd;
+}
+
+/* FOOTER */
+.site-footer{
+    margin-top:50px;
+    background:#1f2937;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+.footer-copy{
+    margin-bottom:15px;
+}
+.footer-links{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+}
+.footer-links a{
+    color:#d1d5db;
+    text-decoration:none;
+}
+.footer-links a:hover{
+    color:white;
+}
+
