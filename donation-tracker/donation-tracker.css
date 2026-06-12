@@ -1,13 +1,14 @@
-@import "template.css";
+@import "/template.css";
 /*form input arrangements*/
 form{
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    background-color: var(--background-colour);
+    background-color: var(--text-on-colour);
     color: var(--text-colour);
     padding-bottom: 30px;
+    border-radius: 5px;
 }
 #simple-input-fieldset{
     display: flex;
@@ -24,9 +25,6 @@ form{
     display: flex;
     flex-direction: column;
     text-align: left;
-}
-#donation-form-title{
-    background-color: var(--background-colour);
 }
 @media (max-width:768px) {
     #simple-input-fieldset{
