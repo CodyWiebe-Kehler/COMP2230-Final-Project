@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PiXELL River Financial - Template</title>
+    <title>Event Signup - PiXELL River Financial</title>
     <link rel="stylesheet" href="template.css">
     <link rel="stylesheet" href="event_signup.css">
 </head>
@@ -22,10 +22,42 @@
         </ul>
     </nav>
     <main>
-        <section>
-            <p>Each webpage's form goes here</p>
-        </section>
+        <h1>Community Event Signup</h1>
+        <p class="intro">Use this form to register PiXELL River Financial's participation in an upcoming community
+            event.</p>
+        <form action="" id="event-signup-form">
+            <div class="form-group" id="group-event-name">
+                <label for="event-name">Event Name</label>
+                <input type="text" id="event-name" name="event-name" required>
+                <span class="error-message">Please enter the event name</span>
+            </div>
+            <div class="form-group" id="group-rep-name">
+                <label for="rep-name">Company Representative's Name</label>
+                <input type="text" id="rep-name" name="rep-name" required>
+                <span class="error-message">Please enter the Representative's name</span>
+            </div>
+            <div class="form-group" id="group-rep-email">
+                <label for="rep-email">Representative's email</label>
+                <input type="email" id="rep-email" name="rep-email" required>
+                <span class="error-message">Please enter a valid email address</span>
+            </div>
+            <div class="form-group" id="group-role">
+                <label for="role-selection">Role at Event</label>
+                <select name="role-selection" id="role-selection" required>
+                    <option value="">Select a role</option>
+                    <option value="sponsor">Sponsor</option>
+                    <option value="participant">Participant</option>
+                    <option value="organizer">Organizer</option>
+                </select>
+                <span class="error-message">Please select a role</span>
+            </div>
+
+            <button type="submit">Submit Signup</button>
+
+            <div id="form-status" role="status" aria-live="polite"></div>
+        </form>
     </main>
+
     <footer class="site-footer">
         <p class="footer-copy">&copy; 2026 PiXELL River Financial. All rights reserved.</p>
         <nav class="footer-links">
