@@ -1,17 +1,19 @@
 :root {
     /*variables allow easy site wide changing of colour scheme and fonts*/
-    --dark-background-colour: black;
+    --dark-background-colour: #2D2D30;
     --dark-text-colour: white;
     --dark-accent-colour:#27AAE0;
+    --dark-text-on-colour:#252526; /*slightly darker than background*/
 
-    --light-background-colour: white;
+    --light-background-colour: #F5F5F5; /*very slightly off white for eye strain*/
     --light-text-colour: black;
     --light-accent-colour:#2B3891;
-
+    --light-text-on-colour:lightgrey;
     /*current variables*/
     --background-colour:var(--light-background-colour) ;
     --text-colour:var(--light-text-colour);
     --accent-colour:var(--light-accent-colour);
+    --text-on-colour:var(var(--light-text-on-colour));
 
     /*can use variables for fonts too*/
     --main-font: 'Arial',sans-serif;
@@ -24,6 +26,7 @@
         --background-colour:var(--dark-background-colour);
         --text-colour:var(--dark-text-colour);
         --accent-colour:var(--dark-accent-colour);
+        --text-on-colour:var(var(--dark-text-on-colour));
     }
 }
 @media (prefers-color-scheme: light){
@@ -32,6 +35,7 @@
         --background-colour:var(--light-background-colour);
         --text-colour:var(--light-text-colour);
         --accent-colour:var(--light-accent-colour);
+        --text-on-colour:var(var(--light-text-on-colour));
     }
 }
 
@@ -93,4 +97,32 @@ footer nav a{
 }
 footer p{
     margin: 3px;
+}
+
+.theme-btn{
+    position: absolute;
+    right: 5px;
+    top: 3px;
+}
+
+/**/
+nav{
+    background-color: var(--text-on-colour);
+    padding: 5px 0px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+main section{
+    background-color: var(--text-on-colour);
+}
+
+/*hide nav toggle on desktop*/
+.menu-btn{
+    display: none;
+}
+
+@media (max-width:768px) {
+    .menu-btn{
+        display: inline;
+    }
 }
