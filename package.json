@@ -1,0 +1,21 @@
+{
+  "name": "module-7-project",
+  "version": "1.0.0",
+  "description": "The Community Support Tracker is a web application designed for PiXELL River Financial to monitor and manage various community support initiatives.",
+  "main": "template.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodyWiebe-Kehler/COMP2230-Final-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/CodyWiebe-Kehler/COMP2230-Final-Project/issues"
+  },
+  "homepage": "https://github.com/CodyWiebe-Kehler/COMP2230-Final-Project#readme"
+}
