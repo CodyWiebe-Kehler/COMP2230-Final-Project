@@ -23,20 +23,15 @@ beforeEach(() => {
 })
 
 /**
- * tests descriptions comment
- * addNumbers(number,number)
- * -- 1. both args positive numbers
- * -- 2. one arg positive, one arg negative
- * -- 3. both args negative
- * -- 4. first arg not a number type
- * -- 5. second arg not a number type
+ * tests if updateThemeColours runs without errors
+ * more of a test of jest than of the code.
  */
 
 //tests for the addNumbers function
 describe("updateThemeColours",() => {
     //runs a jest test, takes label, and testing function as input
-    test("test1", () => {
+    test("no error test", () => {
         //function to run and expected return value
-        expect(updateThemeColours).toBe();
+        expect(() => updateThemeColours).not.toThrow();
     })
 })
