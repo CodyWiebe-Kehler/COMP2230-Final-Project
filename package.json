@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/CodyWiebe-Kehler/COMP2230-Final-Project/issues"
   },
-  "homepage": "https://github.com/CodyWiebe-Kehler/COMP2230-Final-Project#readme"
+  "homepage": "https://github.com/CodyWiebe-Kehler/COMP2230-Final-Project#readme",
+  "devDependencies": {
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1",
+    "jsdom": "^29.1.1"
+  }
 }
