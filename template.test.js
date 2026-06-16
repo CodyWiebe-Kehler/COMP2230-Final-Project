@@ -29,9 +29,9 @@ beforeEach(() => {
  */
 
 //tests for the addNumbers function
-describe("updateThemeColours",() => {
+describe("example test for updateThemeColours()",() => {
     //runs a jest test, takes label, and testing function as input
-    test("no error test", () => {
+    test("updateThemeColours does not throw any errors", () => {
         //function to run and expected return value
         expect(() => updateThemeColours).not.toThrow();
     })
