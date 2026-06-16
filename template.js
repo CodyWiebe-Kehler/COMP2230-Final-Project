@@ -109,7 +109,9 @@ menuButton.classList.add("menu-btn");
 
 // Insert button before navigation
 const nav = document.querySelector(".site-nav");
-nav.parentNode.insertBefore(menuButton, nav);
+//?. means it only continues the chain if the nav object exists
+//this fixes error when jest testing since nav object doesnt exist in node.js environment
+nav?.parentNode.insertBefore(menuButton, nav);
 
 // Hide navigation by default on small screens
 if (window.innerWidth <= 768) {

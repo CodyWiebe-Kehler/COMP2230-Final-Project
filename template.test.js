@@ -20,6 +20,7 @@ const { addUncaughtExceptionCaptureCallback } = require("process");
 beforeEach(() => {
     // mount the HTML content to the virtual DOM
     document.documentElement.innerHTML = html.toString();
+    document.body.innerHTML = '<nav class="site-nav"></nav>'
 })
 
 /**
