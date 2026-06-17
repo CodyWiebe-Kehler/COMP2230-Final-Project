@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     /*regular expressions*/
     const alphanumericRegex = /^[a-zA-Z0-9]*$/;
-    const alphanumericPlusRegex = /^[a-zA-Z0-9!@#\$%\^\&\*()_+\-=\[\]{};':"\\|,.<>\/?]+$/;
+    const alphanumericPlusRegex = /^[a-zA-Z0-9!@#\$%\^\&\*()_+\-=\[\]{};':"\\| ,.<>\/?]+$/;
     const moneyRegex = /^\d{1,5}$|(?=^.{1,5}$)^\d+\.\d{0,2}$/;
     const dateRegex = 0;
 
@@ -22,7 +22,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     form.addEventListener("submit", (event) => {
         event.preventDefault();
 
-        console.log("inputs:"+validateInputs())
+        if (validateInputs()){
+            console.log(collectFormData());
+        }
     })
 
     function initialize(){
@@ -123,4 +125,22 @@ document.addEventListener("DOMContentLoaded", (event) => {
         })
     }
 
+    /**
+     * collects formData and returns it as a JSON object for later storage
+     */
+    function collectFormData(){
+        let data = {
+            "name":"",
+            "amount":0,
+            "date":"UTCstring", //stored as ISO string for international standardization
+            "message":""
+        }
+
+        data.name = nameInput.value;
+        data.amount = amountInput.value;
+        data.date = dateInput.valueAsDate.toISOString();
+        data.message = messageInput.value;
+
+        return data;
+    }
 })
