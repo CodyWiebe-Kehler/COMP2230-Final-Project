@@ -39,3 +39,8 @@ form{
 #message-input{
     resize: none;
 }
+
+.error-message{
+    color: red;
+    background-color: var(--background-colour);
+}
