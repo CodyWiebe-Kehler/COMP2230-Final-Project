@@ -6,7 +6,6 @@ let dateInput;
 let messageInput;
 
 /*regular expressions*/
-let alphanumericRegex;
 let alphanumericPlusRegex;
 let moneyRegex;
 
@@ -149,7 +148,7 @@ function collectFormData(nameInput,amountInput,dateInput,messageInput){
 
 /**
  * returns the date object for todays date, with timezone adjusted hours, at minute 0, second 0
- * @returns 
+ * @returns {Date} date object with todays year, month, and day, and hours, minutes, seconds, and milliseconds set to 0
  */
 function getToday(){
     let today = new Date(Date.now())
@@ -160,7 +159,19 @@ function getToday(){
     return today
 }
 
+function getGlobalVariables(){
+    return {
+        form,
+        nameInput,
+        amountInput,
+        dateInput,
+        messageInput,
+        alphanumericPlusRegex,
+        moneyRegex
+    }
+}
+
 if (typeof module !== "undefined"){
-    module.exports = {initialize, collectFormData, validateInputs}
+    module.exports = {initialize, getGlobalVariables ,collectFormData, validateInputs, displayError, clearErrorUI, getToday}
 }
 
