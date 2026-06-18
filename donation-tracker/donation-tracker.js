@@ -35,10 +35,10 @@ function initialize(){
     alphanumericRegex = /^[a-zA-Z0-9]*$/;
     alphanumericPlusRegex = /^[a-zA-Z0-9!@#\$%\^\&\*()_+\-=\[\]{};':"\\| ,.<>\/?]+$/;
     moneyRegex = /^\d{1,5}$|(?=^.{1,5}$)^\d+\.\d{0,2}$/;
-    
+
     //sets date input to todays date
-    console.log(new Date(Date.now()).toISOString())
-    dateInput.value = new Date(Date.now());
+    console.log(getToday())
+    dateInput.valueAsDate = getToday();
 }
 
 /**
@@ -85,27 +85,11 @@ function validateInputs(){
         console.warn("Donation amount must be a positive number");
     }
     
-    let todayUTC = new Date(Date.now())
-    todayUTC.setHours(-5)
-    todayUTC.setMinutes(0)
-    todayUTC.setSeconds(0)
-    todayUTC.setMilliseconds(0)
-    todayUTC = todayUTC.toISOString()
-    //validates that date not empty/blank, and is in valid date format
+    //validates that date not empty/blank
     if (dateInput.valueAsDate === null){
         valid = false;
         displayError(dateInput,"Donation date must not be empty");
         console.warn("Donation date must not be empty");
-    }
-    /*validates that date is today
-    *ISO string representing today at hour 0, minute 0, etc
-    *fixes timezone issues when comparing to date input value
-    */
-    else if (!(dateInput.valueAsDate.toISOString() == todayUTC)){
-        //console.log("donation dateis not today")
-        valid = false;
-        displayError(dateInput,"Donation date must be todays date");
-        console.warn("Donation date must be todays date");
     }
 
     //message input matches to alphanumeric only
@@ -144,8 +128,12 @@ function clearErrorUI(){
 }
 
 /**
- * collects formData and returns it as a JSON object for later storage
- */
+ * collects formData from provided input DOM elements and returns it as a JSON object for later storage
+ * @param {object} nameInput The charity name DOM input element
+ * @param {object} amountInput  The donation amount DOM input element
+ * @param {object} dateInput  The donation date DOM input element
+ * @param {object} messageInput The donation message DOM input element
+*/
 function collectFormData(nameInput,amountInput,dateInput,messageInput){
     let data = {
         "name":"",
@@ -160,6 +148,19 @@ function collectFormData(nameInput,amountInput,dateInput,messageInput){
     data.message = messageInput.value;
 
     return data;
+}
+
+/**
+ * returns the date object for todays date, with timezone adjusted hours, at minute 0, second 0
+ * @returns 
+ */
+function getToday(){
+    let today = new Date(Date.now())
+    today.setHours(0)
+    today.setMinutes(0)
+    today.setSeconds(0)
+    today.setMilliseconds(0)
+    return today
 }
 
 if (typeof module !== "undefined"){
