@@ -38,7 +38,7 @@ function initialize(){
     
     //sets date input to todays date
     console.log(new Date(Date.now()).toISOString())
-    dateInput.valueAsDate = new Date(Date.now());
+    dateInput.value = new Date(Date.now());
 }
 
 /**
@@ -46,6 +46,16 @@ function initialize(){
  * @returns {boolean} whether or not the form inputs are valid and can be submitted 
  */
 function validateInputs(){
+    //gets DOM elements from HTML page
+    form = document.getElementById("donation-tracker-form");
+    nameInput = document.getElementById("charity-name-input");
+    amountInput = document.getElementById("amount-input");
+    dateInput = document.getElementById("date-input");
+    messageInput = document.getElementById("message-input");
+    alphanumericRegex = /^[a-zA-Z0-9]*$/;
+    alphanumericPlusRegex = /^[a-zA-Z0-9!@#\$%\^\&\*()_+\-=\[\]{};':"\\| ,.<>\/?]+$/;
+    moneyRegex = /^\d{1,5}$|(?=^.{1,5}$)^\d+\.\d{0,2}$/;
+
     clearErrorUI()
     let valid = true;
     //ensures there is a value in chosen charity
@@ -151,4 +161,8 @@ function collectFormData(nameInput,amountInput,dateInput,messageInput){
 
     return data;
 }
-module.exports = {initialize, collectFormData}
+
+if (typeof module !== "undefined"){
+    module.exports = {initialize, collectFormData, validateInputs}
+}
+
