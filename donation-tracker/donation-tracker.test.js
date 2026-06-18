@@ -1,0 +1,69 @@
+/**
+ * jest test script copied from template
+ * 
+ * @author Cody Wiebe-Kehler
+ * @version 1.0.1
+ * 
+ */
+
+const fs = require("fs");
+const path = require("path");
+
+// reads the HTML the script thats being tested works with
+const html = fs.readFileSync(path.resolve(__dirname,"./donation-tracker.html"), "utf-8")
+
+//import methods we need for testing
+const {initialize, collectFormData} = require("./donation-tracker.js"); //imports functions from our script
+const { testEnvironment } = require("../jest.config.js"); //imports dependancy functions from jest.config.js
+const { addUncaughtExceptionCaptureCallback } = require("process");
+//const { describe } = require("yargs");
+
+//executes before each test in the module
+beforeEach(() => {
+    // mount the HTML content to the virtual DOM
+    document.documentElement.innerHTML = html.toString();
+    //document.body.innerHTML = '<nav class="site-nav"></nav>'
+})
+
+/**
+ * Tests the collectFormData() function
+ */
+describe("teststhe collectFormData() function", () => {
+    test("tests that collect form data ", () => {
+        //arrange
+        const nameInput = { value: "Red Cross" };
+        const amountInput = { value: "50" };
+        const dateInput = {
+            valueAsDate: new Date("2026-06-17")
+        };
+        const messageInput = { value: "Thanks" };
+
+        const result = collectFormData(
+            nameInput,
+            amountInput,
+            dateInput,
+            messageInput
+        );
+
+        expect(result.name).toBe("Red Cross");
+    })
+})
+
+
+// /**
+//  * Tests for collectFormData()
+//  * -- 1. default return object is correct
+//  */
+// describe("Tests for collectFormData()",() => {
+//     test("collectFormData default return object", () => {
+//         //arrange
+//         let expectedData = {
+//             "name":"",
+//             "amount":0,
+//             "date":"UTCstring",
+//             "message":""
+//         }
+//         //act & assert
+//         expect(collectFormData()).toBe(expectedData)
+//     })
+// })
