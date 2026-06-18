@@ -32,7 +32,6 @@ function initialize(){
     dateInput = document.getElementById("date-input");
     messageInput = document.getElementById("message-input");
     //Regex
-    alphanumericRegex = /^[a-zA-Z0-9]*$/;
     alphanumericPlusRegex = /^[a-zA-Z0-9!@#\$%\^\&\*()_+\-=\[\]{};':"\\| ,.<>\/?]+$/;
     moneyRegex = /^\d{1,5}$|(?=^.{1,5}$)^\d+\.\d{0,2}$/;
 
@@ -52,7 +51,6 @@ function validateInputs(){
     amountInput = document.getElementById("amount-input");
     dateInput = document.getElementById("date-input");
     messageInput = document.getElementById("message-input");
-    alphanumericRegex = /^[a-zA-Z0-9]*$/;
     alphanumericPlusRegex = /^[a-zA-Z0-9!@#\$%\^\&\*()_+\-=\[\]{};':"\\| ,.<>\/?]+$/;
     moneyRegex = /^\d{1,5}$|(?=^.{1,5}$)^\d+\.\d{0,2}$/;
 
@@ -65,12 +63,11 @@ function validateInputs(){
         console.warn("Charity input must not be empty");
     }
     //name input matches to alphanumeric only
-    if (!(alphanumericRegex.test(nameInput.value))){
+    if (!(alphanumericPlusRegex.test(nameInput.value))){
         valid = false;
         displayError(nameInput,"Charity input must be only alphanumeric characters");
         console.warn("Charity input must be only alphanumeric characters");
     }
-    //console.log(nameRegex.test(nameInput.value))
 
     //ensures amount is numeric and positive
     if (!(moneyRegex.test(amountInput.value))){

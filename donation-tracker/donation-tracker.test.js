@@ -21,7 +21,6 @@ const { addUncaughtExceptionCaptureCallback } = require("process");
 beforeEach(() => {
     // mount the HTML content to the virtual DOM
     document.documentElement.innerHTML = html.toString();
-    //document.body.innerHTML = '<nav class="site-nav"></nav>'
 })
 
 /**
@@ -62,14 +61,22 @@ describe("tests the collectFormData() function", () => {
  * -- 1. return false since chosen charity is empty
  */
 describe("tests the validateInputs() function", () => {
+    test("test that validateInput retruns true when all inputs are valid", () => {
+        //arrange
+        document.getElementById("charity-name-input").value = "test name";
+        document.getElementById("amount-input").value = "1";
+        document.getElementById("date-input").valueAsDate = new Date(Date.now());
+        document.getElementById("message-input").value = "test message";
+        //act and assert
+        expect(validateInputs()).toBe(true);
+    });
     test("test that validate inputs returns false with invalid input", () => {
         //arrange
         document.getElementById("charity-name-input").value = "";
         document.getElementById("amount-input").value = "1";
         document.getElementById("date-input").valueAsDate = new Date(Date.now());
-        document.getElementById("message-input").value = "test";
-        
+        document.getElementById("message-input").value = "test message";
         //act && assert
-        expect(validateInputs()).toBe(false)
-    })
+        expect(validateInputs()).toBe(false);
+    });
 })
