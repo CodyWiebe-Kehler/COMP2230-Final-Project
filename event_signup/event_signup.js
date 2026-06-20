@@ -1,5 +1,3 @@
-import "../template.js"
-
 document.addEventListener("DOMContentLoaded", function () {
 
     // get the form element
