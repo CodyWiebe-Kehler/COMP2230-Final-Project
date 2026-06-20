@@ -21,9 +21,22 @@ function isValidEmail(email) {
     return email.test(email.trim());
 }
 
-// a function to validate the Representative's email
+// a function to validate the role at the event
 function isValidRole(role) {
     return role.length > 0;
 }
 
-// Role at Event
+// a function that collect the form values
+function formValues() {
+    const formValues = {
+        eventName = document.getElementById("event-name").value,
+        repName = document.getElementById("rep-name").value,
+        repEmail = document.getElementById("rep-email").value,
+        role = document.getElementById("role-selection").value
+    };
+    return formValues;
+}
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+})
