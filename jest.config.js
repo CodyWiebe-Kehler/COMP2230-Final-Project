@@ -1,3 +1,6 @@
+module.exports = {
+    testEnvironment: "jsdom"
+};
 const { testEnvironment } = require("jest-environment-jsdom")
 
 //jest.config.js
