@@ -10,10 +10,12 @@
 </head>
 
 <body>
+    <!-- header section with title and description -->
     <header class="site-header">
         <h1>PRF: Community Support Tracker</h1>
         <p>This tool will help us monitor and manage our various community support initiatives</p>
     </header>
+    <!-- navigation bar that contain 3 links to donation-tracker, volunteer-tracker, and event-signup pages -->
     <nav class="site-nav">
         <ul class="nav-list">
             <li><a href="donation-tracker.html">Donation Tracker</a></li>
@@ -21,26 +23,32 @@
             <li><a href="event_signup.html">Event signup</a></li>
         </ul>
     </nav>
+    <!-- main content of the event-signup-form -->
     <main>
         <h1>Community Event Signup</h1>
         <p class="intro">Use this form to register PiXELL River Financial's participation in an upcoming community
             event.</p>
+            <!-- event signup form with validation -->
         <form action="" id="event-signup-form">
+            <!-- event name input field -->
             <div class="form-group" id="group-event-name">
                 <label for="event-name">Event Name</label>
                 <input type="text" id="event-name" name="event-name" required>
                 <span class="error-message">Please enter the event name</span>
             </div>
+            <!-- Representative name input field -->
             <div class="form-group" id="group-rep-name">
                 <label for="rep-name">Company Representative's Name</label>
                 <input type="text" id="rep-name" name="rep-name" required>
                 <span class="error-message">Please enter the Representative's name</span>
             </div>
+            <!-- email input field -->
             <div class="form-group" id="group-rep-email">
                 <label for="rep-email">Representative's email</label>
                 <input type="email" id="rep-email" name="rep-email" required>
                 <span class="error-message">Please enter a valid email address</span>
             </div>
+            <!-- role selection dropdown -->
             <div class="form-group" id="group-role">
                 <label for="role-selection">Role at Event</label>
                 <select name="role-selection" id="role-selection" required>
@@ -53,11 +61,12 @@
             </div>
 
             <button type="submit">Submit Signup</button>
-
+            <!-- display successful or fail message of the form submission -->
             <div id="form-status" role="status" aria-live="polite"></div>
         </form>
     </main>
 
+    <!-- footer section that contain the copyright and links -->
     <footer class="site-footer">
         <p class="footer-copy">&copy; 2026 PiXELL River Financial. All rights reserved.</p>
         <nav class="footer-links">

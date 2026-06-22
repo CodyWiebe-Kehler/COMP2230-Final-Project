@@ -1,3 +1,4 @@
+/* custom properties */
 :root {
     --primary: #003366;
     --accent: #0072CE;
@@ -15,6 +16,7 @@ body {
     background-color: var(--light-bg);
 }
 
+/* layout */
 main {
     max-width: 720px;
     margin: 2rem auto;
@@ -33,6 +35,7 @@ p.intro {
     color: var(--text);
 }
 
+/* form styles */
 form#event-signup-form {
     background: var(--light-bg);
     border: 1px solid var(--border);
@@ -51,6 +54,7 @@ label {
     font-size: 0.95rem;
 }
 
+/* input fields  */
 input[type="text"],
 input[type="email"],
 select {
@@ -69,6 +73,7 @@ select:focus {
     outline-offset: 1px;
 }
 
+/* .error-message */
 .error-message {
     color: var(--error);
     font-size: 0.85rem;
@@ -76,6 +81,7 @@ select:focus {
     display: none;
 }
 
+/* form submission button */
 button[type="submit"] {
     background: var(--primary);
     color: #fff;
@@ -104,6 +110,7 @@ button[type="submit"]:focus {
     color: var(--error);
 }
 
+/* dark mode */
 body:not(.light-theme) {
     --primary: #1a7fbf;
     --accent: #27AAE0;
@@ -113,5 +120,3 @@ body:not(.light-theme) {
     --text: #ffffff;
     --border: #444;
 }
-
-
