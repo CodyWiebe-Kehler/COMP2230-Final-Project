@@ -1,0 +1,25 @@
+{
+  "name": "comp2230-final-project",
+  "version": "1.0.0",
+  "description": "- Cody\r - Mina\r - Kavya",
+  "main": "teamplate.test.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodyWiebe-Kehler/COMP2230-Final-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/CodyWiebe-Kehler/COMP2230-Final-Project/issues"
+  },
+  "homepage": "https://github.com/CodyWiebe-Kehler/COMP2230-Final-Project#readme",
+  "devDependencies": {
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1"
+  }
+}
