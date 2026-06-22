@@ -10,6 +10,13 @@ form{
     padding-bottom: 30px;
     border-radius: 5px;
 }
+form input,textarea{
+    background-color: var(--background-colour);
+    color: var(--text-colour);
+}
+form #submit-button{
+    background-color: var(--accent-colour);
+}
 #simple-input-fieldset{
     display: flex;
     justify-content: space-around;
@@ -40,7 +47,12 @@ form{
     resize: none;
 }
 
+#donation-form-title{
+    color: var(--accent-colour);
+}
+
 .error-message{
     color: red;
     background-color: var(--background-colour);
 }
+
