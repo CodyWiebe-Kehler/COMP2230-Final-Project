@@ -1,0 +1,58 @@
+@import "/template.css";
+/*form input arrangements*/
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: var(--text-on-colour);
+    color: var(--text-colour);
+    padding-bottom: 30px;
+    border-radius: 5px;
+}
+form input,textarea{
+    background-color: var(--background-colour);
+    color: var(--text-colour);
+}
+form #submit-button{
+    background-color: var(--accent-colour);
+}
+#simple-input-fieldset{
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 0;
+    width: 90%;
+}
+#centered-input-fieldset{
+    text-align: center;
+    border-top: 0;
+    width: 90%;
+}
+#message-input-container{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+@media (max-width:768px) {
+    #simple-input-fieldset{
+        flex-direction: column;
+    }
+}
+
+/*individual input adjustments*/
+#submit-button{
+    margin-top: 10px;
+}
+#message-input{
+    resize: none;
+}
+
+#donation-form-title{
+    color: var(--accent-colour);
+}
+
+.error-message{
+    color: red;
+    background-color: var(--background-colour);
+}
+
