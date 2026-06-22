@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiXELL River Financial - Volunteer Hours Tracker</title>
+
+    <link rel="stylesheet" href="volunteer_tracker.css">
+    <link rel="stylesheet" href="template.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <h1>PRF: Volunteer Hours Tracker</h1>
+        <p>This tool helps monitor and manage our community support initiatives.</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="site-nav">
+        <ul class="nav-list">
+            <li><a href="donation-tracker.html">Donation Tracker</a></li>
+            <li><a href="volunteer-tracker.html">Volunteer Hours</a></li>
+            <li><a href="event-signup.html">Event Signup</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <section class="form-section">
+
+            <h2>Volunteer Hours Form</h2>
+
+            <form id="volunteer-form">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="charity">Charity / Organization</label>
+                        <input type="text" id="charity" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hours">Hours Volunteered</label>
+                        <input type="number"
+                               id="hours"
+                               min="0"
+                               step="0.5"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Volunteer Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rating">
+                            Experience Rating (1-5)
+                        </label>
+                        <input type="number"
+                               id="rating"
+                               min="1"
+                               max="5"
+                               required>
+                    </div>
+
+                </div>
+
+                <button type="submit">
+                    Log Volunteer Hours
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- Logged Entries -->
+        <section class="entries-section">
+
+            <h2>Volunteer Records</h2>
+
+            <div id="entries">
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <p class="footer-copy">
+            &copy; 2026 PiXELL River Financial. All rights reserved.
+        </p>
+
+        <nav class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Accessibility</a>
+            <a href="#">Contact Us</a>
+        </nav>
+
+    </footer>
+
+    <script src="volunteer_tracker.js"></script>
+    <script src="template.js"></script>
+</body>
+</html>
