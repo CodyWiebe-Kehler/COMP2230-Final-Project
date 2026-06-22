@@ -89,12 +89,14 @@ function updateThemeColours(){
             document.documentElement.style.setProperty('--background-colour','var(--light-background-colour)');
             document.documentElement.style.setProperty('--text-colour','var(--light-text-colour)');
             document.documentElement.style.setProperty('--accent-colour','var(--light-accent-colour)');
+            document.documentElement.style.setProperty('--text-on-colour','var(--light-text-on-colour)');
         } 
     else {
         //sets css current colours to dark mode variables
         document.documentElement.style.setProperty('--background-colour','var(--dark-background-colour)')
         document.documentElement.style.setProperty('--text-colour','var(--dark-text-colour)')
         document.documentElement.style.setProperty('--accent-colour','var(--dark-accent-colour)');
+        document.documentElement.style.setProperty('--text-on-colour','var(--dark-text-on-colour)');
     }
 }
 
@@ -107,9 +109,10 @@ menuButton.classList.add("menu-btn");
 
 // Insert button before navigation
 const nav = document.querySelector(".site-nav");
-if (nav){
-    nav.parentNode.insertBefore(menuButton, nav);
-}
+//?. means it only continues the chain if the nav object exists
+//this fixes error when jest testing since nav object doesnt exist in node.js environment
+nav?.parentNode.insertBefore(menuButton, nav);
+
 // Hide navigation by default on small screens
 if (window.innerWidth <= 768) {
     nav.style.display = "none";
@@ -135,3 +138,6 @@ window.addEventListener("resize", () => {
         menuButton.textContent = "☰ Menu";
     }
 });
+
+module.exports = {updateThemeColours}
+

@@ -1,17 +1,19 @@
 :root {
     /*variables allow easy site wide changing of colour scheme and fonts*/
-    --dark-background-colour: black;
+    --dark-background-colour: #2D2D30;
     --dark-text-colour: white;
     --dark-accent-colour:#27AAE0;
+    --dark-text-on-colour:#252526; /*slightly darker than background*/
 
-    --light-background-colour: white;
+    --light-background-colour: #F5F5F5; /*very slightly off white for eye strain*/
     --light-text-colour: black;
     --light-accent-colour:#2B3891;
-
+    --light-text-on-colour:lightgrey;
     /*current variables*/
     --background-colour:var(--light-background-colour) ;
     --text-colour:var(--light-text-colour);
     --accent-colour:var(--light-accent-colour);
+    --text-on-colour:var(var(--light-text-on-colour));
 
     /*can use variables for fonts too*/
     --main-font: 'Arial',sans-serif;
@@ -24,6 +26,7 @@
         --background-colour:var(--dark-background-colour);
         --text-colour:var(--dark-text-colour);
         --accent-colour:var(--dark-accent-colour);
+        --text-on-colour:var(var(--dark-text-on-colour));
     }
 }
 @media (prefers-color-scheme: light){
@@ -32,65 +35,212 @@
         --background-colour:var(--light-background-colour);
         --text-colour:var(--light-text-colour);
         --accent-colour:var(--light-accent-colour);
+        --text-on-colour:var(var(--light-text-on-colour));
     }
 }
 
 /*apply currently selected colours*/
-body {
+
+
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* BODY */
+
+body{
+    font-family: Arial, sans-serif;
     background-color: var(--background-colour);
     color: var(--text-colour);
 }
 
-/*centers header, and puts theme button beside text*/
-header{
-    text-align: center;
-}
-header p{
-    display: inline;
-}
-header button{
-    display: inline;
+/* HEADER */
+
+.site-header{
+    background:#1e3a8a;
+    color:white;
+    text-align:center;
+    padding:30px;
 }
 
-/*seperates main page content a bit from navbar and footer*/
-main{
-    margin: 50px 0px;
+.site-header p{
+    margin-top:10px;
 }
 
-/*centers and spaces out nav links*/
-nav ul{
+/* NAVIGATION */
+/* NAVIGATION */
+
+.site-nav{
+    background: #111827;
+    padding: 15px;
+}
+
+.nav-list{
     display: flex;
-    justify-content: space-around;
-
-    padding: 0;
-    list-style-type: none;
-}
-nav ul li{
-    flex: 1;
-
-    text-align: center;
-}
-nav ul li a{
-    color: var(--accent-colour);
-}
-
-/*footer centered, coloured, and compacted a bit*/
-footer{
-    display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    gap: 40px;
+    list-style: none;
 }
-footer nav{
-    display: flex;
 
-    width: 50%;
+.nav-list a{
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
 }
-footer nav a{
-    flex: 1;
 
-    text-align: center;
-    color: var(--accent-colour);
+.nav-list a:hover{
+    color: #60a5fa;
 }
-footer p{
-    margin: 3px;
+
+/* MAIN */
+
+.container{
+    width:90%;
+    max-width:1000px;
+    margin:30px auto;
+}
+
+/* FORM */
+
+.form-section{
+    background-color: var(--background-colour);
+    color: var(--text-colour);
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.form-section h2{
+    margin-bottom:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+label{
+    margin-bottom:8px;
+    font-weight:bold;
+}
+input{
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    background-color: white;
+    color: black;
+}
+
+button{
+    margin-top:25px;
+    padding:12px 20px;
+    border:none;
+    border-radius:6px;
+    background:#1e3a8a;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#2848a7;
+}
+
+/* ENTRIES */
+.entries-section{
+    margin-top:30px;
+    background-color: var(--background-colour);
+    color: var(--text-colour);
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.entry{
+    padding:15px;
+    border-bottom:1px solid #ddd;
+}
+
+/* FOOTER */
+.site-footer{
+    margin-top:50px;
+    background:#1f2937;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+.footer-copy{
+    margin-bottom:15px;
+}
+.footer-links{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+}
+.footer-links a{
+    color:#d1d5db;
+    text-decoration:none;
+}
+.footer-links a:hover{
+    color:white;
+}
+
+/* RESPONSIVE */
+@media (max-width:768px){
+    .nav-list{
+        flex-direction: column;
+        gap: 15px;
+    }
+    .form-grid{
+        grid-template-columns: 1fr;
+    }
+    .footer-links{
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+/* DARK MODE SUPPORT */
+
+.dark-mode .form-section,
+.dark-mode .entries-section{
+
+    background-color: #1f2937;
+    color: white;
+
+}
+
+.dark-mode input{
+
+    background-color: #374151;
+    color: white;
+    border: 1px solid #4b5563;
+
+}
+
+.dark-mode label,
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode p{
+
+    color: white;
+
+}
+
+.dark-mode .entry{
+
+    border-bottom:1px solid #4b5563;
+
 }
