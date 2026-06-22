@@ -21,7 +21,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     })
 })
 
-
+/**
+ * initializes page by pulling references to global variables for input objects,
+ * setting global regex variables, and running startup functions such as setting
+ * todays date.
+ */
 function initialize(){
     //fills in global variables
     //DOM elements
@@ -159,6 +163,11 @@ function getToday(){
     return today
 }
 
+/**
+ * gets references to all global variables
+ * @returns {object} globalVariables object containing references to all form 
+ * inputs objects and the regex variables,
+ */
 function getGlobalVariables(){
     return {
         form,
