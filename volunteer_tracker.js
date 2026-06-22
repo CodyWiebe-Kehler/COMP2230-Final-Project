@@ -17,49 +17,52 @@ const form = document.getElementById("volunteer-form");
 const entriesDiv = document.getElementById("entries");
 
 // Load previous records
-
 let entries =
     JSON.parse(localStorage.getItem("volunteerEntries")) || [];
 
 // Display records when page loads
-
 window.onload = renderEntries;
 
-form.addEventListener("submit", function (event) {
+// Only attach listener if the form exists
+if (form) {
 
-    event.preventDefault();
+    form.addEventListener("submit", function (event) {
 
-    const charity =
-        document.getElementById("charity").value;
+        event.preventDefault();
 
-    const hours =
-        document.getElementById("hours").value;
+        const charity =
+            document.getElementById("charity").value;
 
-    const date =
-        document.getElementById("date").value;
+        const hours =
+            document.getElementById("hours").value;
 
-    const rating =
-        document.getElementById("rating").value;
+        const date =
+            document.getElementById("date").value;
 
-    const entry = {
-        charity,
-        hours,
-        date,
-        rating
-    };
+        const rating =
+            document.getElementById("rating").value;
 
-    entries.push(entry);
+        const entry = {
+            charity,
+            hours,
+            date,
+            rating
+        };
 
-    localStorage.setItem(
-        "volunteerEntries",
-        JSON.stringify(entries)
-    );
+        entries.push(entry);
 
-    form.reset();
+        localStorage.setItem(
+            "volunteerEntries",
+            JSON.stringify(entries)
+        );
 
-    renderEntries();
+        form.reset();
 
-});
+        renderEntries();
+
+    });
+
+}
 // DISPLAY ENTRIES
 function renderEntries(){
 

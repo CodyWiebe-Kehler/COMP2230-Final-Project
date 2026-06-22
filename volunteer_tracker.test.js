@@ -15,7 +15,7 @@ const html = fs.readFileSync(
 const {
     setCookie,
     getCookie
-} = require("kvy_volunteer_tracker");
+} = require("./volunteer_tracker");
 
 // Runs before each test
 beforeEach(() => {
