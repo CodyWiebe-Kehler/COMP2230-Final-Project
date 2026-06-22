@@ -7,14 +7,11 @@
 
 const fs = require("fs");
 const path = require("path");
+// imports method from event_signup.js script
+const { getFormValues, isValidEventName, isValidEmail, isValidRepName, isValidRole } = require("./event_signup.js")
 
 // reads the HTML the script thats being tested works with
-const html = fs.readFileSync(path.resolve(__dirname,"./event_signup.html"), "utf-8")
-
-//import methods we need for testing
-// const {updateThemeColours} = require("./template.js"); //imports functions from our script
-// const { testEnvironment } = require("./jest.config.js"); //imports dependancy functions from jest.config.js
-// const { addUncaughtExceptionCaptureCallback } = require("process");
+const html = fs.readFileSync(path.resolve(__dirname, "./event_signup.html"), "utf-8")
 
 //executes before each test in the module
 beforeEach(() => {
@@ -35,25 +32,25 @@ beforeEach(() => {
 describe("Test Validation for Event Signup Form Submission", () => {
 
     test("should display success message when form is submitted with valid information", () => {
-    // Arrange - set up the variables, inputs, or configurations
-    const eventNameInput = document.getElementById("event-name");
-    const repNameInput = document.getElementById("rep-name");
-    const repEmailInput = document.getElementById("rep-email");
-    const roleSelect = document.getElementById("role-selection");
-    const form = document.getElementById("event-signup-form");
-    const formStatus = document.getElementById("form-status");
+        // Arrange - set up the variables, inputs, or configurations
+        const eventNameInput = document.getElementById("event-name");
+        const repNameInput = document.getElementById("rep-name");
+        const repEmailInput = document.getElementById("rep-email");
+        const roleSelect = document.getElementById("role-selection");
+        const form = document.getElementById("event-signup-form");
+        const formStatus = document.getElementById("form-status");
 
-    // Act - execute the target logic
-    eventNameInput.value = "Wife-Carrying World Championship";
-    repNameInput.value = "Sanna-Mari Nuutinen";
-    repEmailInput.value = "sannamari_k@hotmail.com";
-    roleSelect.value = "organizer";
+        // Act - execute the target logic
+        eventNameInput.value = "Wife-Carrying World Championship";
+        repNameInput.value = "Sanna-Mari Nuutinen";
+        repEmailInput.value = "sannamari_k@hotmail.com";
+        roleSelect.value = "organizer";
 
-    form.dispatchEvent(new Event("submit", {bubbles: true}));
+        form.dispatchEvent(new Event("submit", { bubbles: true }));
 
-    // Assert - validate the outcome matches expectations
-    expect(formStatus.textContent).toBe("Form submitted successfully!");
-    expect(formStatus.style.color).toBe("rgb(46, 125, 50)"); // hex #2e7d32 converts to rgb
+        // Assert - validate the outcome matches expectations
+        expect(formStatus.textContent).toBe("Form submitted successfully!");
+        expect(formStatus.style.color).toBe("rgb(46, 125, 50)"); // hex #2e7d32 converts to rgb
     });
 });
 
@@ -68,23 +65,109 @@ describe("Test Validation Error for Email Format", () => {
 
     test("should display error message for invalid email format", () => {
 
-    // Arrange - set up the variables, inputs, or configurations
-    const eventNameInput = document.getElementById("event-name");
-    const repNameInput = document.getElementById("rep-name");
-    const repEmailInput = document.getElementById("rep-email");
-    const roleSelect = document.getElementById("role-selection");
-    const form = document.getElementById("event-signup-form");
+        // Arrange - set up the variables, inputs, or configurations
+        const eventNameInput = document.getElementById("event-name");
+        const repNameInput = document.getElementById("rep-name");
+        const repEmailInput = document.getElementById("rep-email");
+        const roleSelect = document.getElementById("role-selection");
+        const form = document.getElementById("event-signup-form");
 
-    // Act - execute the target logic
-    eventNameInput.value = "Wife-Carrying World Championship";
-    repEmailInput.value = "Sanna-Mari Nuutinen";
-    repEmailInput.value = "sannamari_kotmail.com";
-    roleSelect.value = "Organizer";
+        // Act - execute the target logic
+        eventNameInput.value = "Wife-Carrying World Championship";
+        repNameInput.value = "Sanna-Mari Nuutinen";
+        repEmailInput.value = "sannamari_kotmail.com";
+        roleSelect.value = "organizer";
 
-    form.dispatchEvent(new Event("submit", {bubbles: true}));
+        form.dispatchEvent(new Event("submit", { bubbles: true }));
 
-    // Assert - validate the outcome matches expectations
-    const emailError = document.querySelector("#group-rep-email .error-message");
-    expect(emailError.style.display).toBe("block")
+        // Assert - validate the outcome matches expectations
+        const emailError = document.querySelector("#group-rep-email .error-message");
+        expect(emailError.style.display).toBe("block")
     });
 });
+
+// Unit Test 1
+/**
+ * test the function for validating required fields
+ */
+
+describe("Validation Function Unit Tests", () => {
+
+    // Test for event name fields (empty values)
+    describe("isValidEventName - Required Field Validation", () => {
+
+        test("should return false for empty event name", () => {
+
+            const result = isValidEventName("");
+            expect(result).toBe(false);
+        });
+    });
+
+    // Test for representative name (required filed)
+    describe("isValidRepName - Required Field Validation", () => {
+
+        test("should return false for empty rep name", () => {
+
+            const result = isValidRepName("");
+            expect(result).toBe(false);
+        });
+    });
+
+    // Test for empty email (required filed)
+    describe("isValidEmail - Format Validation", () => {
+
+        test("should return false for empty email", () => {
+
+            const result = isValidEmail("");
+            expect(result).toBe(false);
+        });
+    });
+
+    // Test for email format (required filed)
+    describe("isValidEmail - Format Validation", () => {
+
+        test("should return false for invalid email format", () => {
+
+            const result = isValidEmail("sannamari_kotmail.com");
+            expect(result).toBe(false);
+        });
+    });
+
+    // Test for role selection (required)
+    describe("isValidRole - Required Filed Validation", () => {
+
+        test("should return false for empty role", () => {
+            const result = isValidRole("");
+            expect(result).toBe(false);
+        })
+    });
+});
+
+// Unit Test 2
+/**
+ * test the getFromValues() that will returns correct data structure
+ */
+
+describe("Data Processing - getFromValues Function", () => {
+    test("should return correct data object with valid form inputs", () => {
+        // arrange
+        const eventNameInput = document.getElementById("event-name");
+        const repNameInput = document.getElementById("rep-name");
+        const repEmailInput = document.getElementById("rep-email");
+        const roleSelect = document.getElementById("role-selection");
+
+        eventNameInput.value = "Wife-Carrying World Championship";
+        repNameInput.value = "Sanna-Mari Nuutinen";
+        repEmailInput.value = "sannamari_kotmail.com";
+        roleSelect.value = "organizer";
+
+        //Act
+        const formData = getFormValues();
+
+        //Assert
+        expect(formData.eventName).toBe("Wife-Carrying World Championship");
+        expect(formData.repName).toBe("Sanna-Mari Nuutinen");
+        expect(formData.repEmail).toBe("sannamari_kotmail.com");
+        expect(formData.role).toBe("organizer");
+    });
+}); 
