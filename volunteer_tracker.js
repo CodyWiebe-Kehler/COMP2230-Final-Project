@@ -105,34 +105,84 @@ function deleteEntry(index){
     renderEntries();
 }
 
-const {
-    setCookie,
-    getCookie
-} = require("./volunteer_tracker");
+// const {
+//     setCookie,
+//     getCookie
+// } = require("./volunteer_tracker");
 
 
-describe("Cookie Functions", () => {
+// ====================
+// COOKIE FUNCTIONS
+// ====================
 
-    beforeEach(() => {
+// Create a cookie
+function setCookie(name, value, days) {
 
-        document.cookie = "";
+    let expires = "";
 
-    });
+    if (days) {
 
+        const date = new Date();
 
-    test("should set a cookie", () => {
-
-        setCookie(
-            "username",
-            "Kavya",
-            1
+        date.setTime(
+            date.getTime() + (days * 24 * 60 * 60 * 1000)
         );
 
-        expect(
-            getCookie("username")
-        ).toBe("Kavya");
+        expires = "; expires=" + date.toUTCString();
+    }
 
-    });
+    document.cookie =
+        name + "=" + value + expires + "; path=/";
+}
+
+// Read a cookie
+function getCookie(name) {
+
+    const cookieName = name + "=";
+
+    const cookieArray = document.cookie.split(";");
+
+    for (let i = 0; i < cookieArray.length; i++) {
+
+        let cookie = cookieArray[i].trim();
+
+        if (cookie.indexOf(cookieName) === 0) {
+
+            return cookie.substring(cookieName.length);
+        }
+    }
+
+    return "";
+}
+
+// Save last visit information
+window.addEventListener("load", () => {
+
+    const lastVisit = getCookie("lastVisit");
+
+    if (lastVisit !== "") {
+
+        console.log(
+            "Previous visit: " + lastVisit
+        );
+    }
+
+    setCookie(
+        "lastVisit",
+        new Date().toLocaleString(),
+        30
+    );
 
 });
 
+// Export functions for Jest testing
+if (typeof module !== "undefined") {
+
+    module.exports = {
+        setCookie,
+        getCookie,
+        renderEntries,
+        deleteEntry
+    };
+
+}
