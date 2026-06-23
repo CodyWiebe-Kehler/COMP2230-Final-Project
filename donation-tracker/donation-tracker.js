@@ -9,6 +9,8 @@ let messageInput;
 let alphanumericPlusRegex;
 let moneyRegex;
 
+let donations;
+
 document.addEventListener("DOMContentLoaded", (event) => {
     initialize()
 
@@ -17,7 +19,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
         if (validateInputs()){
             console.log(collectFormData(nameInput,amountInput,dateInput,messageInput));
+            //adds new donation to the local variable list
+            donations.push(collectFormData(nameInput,amountInput,dateInput,messageInput));
         }
+        //sets localstorage to match local variable
+        localStorage.setItem("donationsEntries",JSON.stringify(donations))
     })
 })
 
@@ -37,6 +43,16 @@ function initialize(){
     //Regex
     alphanumericPlusRegex = /^[a-zA-Z0-9!@#\$%\^\&\*()_+\-=\[\]{};':"\\| ,.<>\/?]+$/;
     moneyRegex = /^\d{1,5}$|(?=^.{1,5}$)^\d+\.\d{0,2}$/;
+
+    //Retrieves donations log from localStorage
+    localEntries = JSON.parse(localStorage.getItem("donationsEntries"))
+    if (localEntries){
+        console.log("localstorage entries found")
+        donations = localEntries
+    }else{
+        console.log("localstorage entries not found")
+        donations = [];
+    }
 
     //sets date input to todays date
     console.log(getToday())
