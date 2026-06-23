@@ -22,7 +22,7 @@
         </ul>
     </nav>
     <main>
-        <section>
+        <section id="donation-form-section">
             <form id="donation-tracker-form">
                 <h2 id="donation-form-title">Donation Form</h2>
                 <fieldset id="simple-input-fieldset">
@@ -48,24 +48,33 @@
                 </fieldset>
             </form>
         </section>
-        <section id="donations-section">
+        <section id="donations-table-section">
             <h2>Donation Records</h2>
             <table id="donations-table">
-                <thead>
+                <thead class="visually-hidden">
                     <tr class="visually-hidden">
-                        <td>Charity Name</td>
-                        <td>Donation Amount</td>
-                        <td>Date</td>
-                        <td>Comment</td>
+                        <td class="visually-hidden">Charity Name</td>
+                        <td class="visually-hidden">Donation Amount</td>
+                        <td class="visually-hidden">Date</td>
+                        <td class="visually-hidden">Comment</td>
                     </tr>
                 </thead>
-                <tr>
-                    <td><strong>Example Name</strong></td>
-                    <td><strong>Amount:</strong> $999</td>
-                    <td><strong>Date:</strong> January -41</td>
-                    <td><strong>Comment:</strong> No comment</td>
-                    <td><button>Remove</button></td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td><strong>Example Name</strong></td>
+                        <td><strong>Amount:</strong> $999</td>
+                        <td><strong>Date:</strong> January -41</td>
+                        <td><strong>Comment:</strong> No comment</td>
+                        <td><button>Remove</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Example Name</strong></td>
+                        <td><strong>Amount:</strong> $999</td>
+                        <td><strong>Date:</strong> January -41</td>
+                        <td><strong>Comment:</strong> No comment</td>
+                        <td><button>Remove</button></td>
+                    </tr>
+                </tbody>
             </table>
         </section>
     </main>
