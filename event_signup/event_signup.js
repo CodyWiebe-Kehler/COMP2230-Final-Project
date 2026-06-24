@@ -66,7 +66,7 @@ function displaySignupsTable() {
  * Delete a signup by index
  */
 function deleteSignups(index) {
-    const signups = localStorageFromStorage();
+    const signups = loadSignupsFromLocalStorage();
 
     // confirmation of deleting the button
     if (confirm("Are you sure you want to delete this signup?")) {
@@ -150,7 +150,63 @@ function showError(fieldId) {
     }
 }
 
+// calculate role brakdown
+function calculateRoleBreakdown() {
+    const signups = loadSignupsFromLocalStorage();
 
+    const breakdown = {
+        sponsor: 0,
+        participant: 0,
+        organizer: 0
+
+    };
+
+    // count each 
+    signups.forEach(signup => {
+        if (breakdown.hasOwnProperty(signup.role)) {
+            breakdown[signup.role]++;
+        }
+    });
+
+    return breakdown;
+}
+
+// render the upcoming events summary
+function showUpcomingEventsSummary() {
+    const breakdown = calculateRoleBreakdown();
+
+    let summarySection = document.getElementById("summary-section");
+    
+    if(!summarySection) {
+    summarySection = document.createElement("section");
+    summarySection.id = "summary-section";
+    document.querySelector("main").appendChild(summarySection);
+
+    }
+    
+    summarySection.innerHTML = `
+        <h2>Upcoming Event Summary</h2>
+        <div class="summary-stats">
+            <div class="stat-card">
+                <h3>Sponsors</h3>
+                <p class="stat-number">${breakdown.sponsor}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Participants</h3>
+                <p class="stat-number">${breakdown.participant}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Organizers</h3>
+                <p class="stat-number">${breakdown.organizer}</p>
+            </div>
+        </div>
+    `;
+}
+
+function initializePage() {
+    displaySignupsTable();
+    showUpcomingEventsSummary();
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("event-signup-form");
@@ -207,71 +263,17 @@ document.addEventListener("DOMContentLoaded", function () {
             formStatus.style.color = "#2e7d32";
 
             form.reset();
+            displaySignupsTable();
+            showUpcomingEventsSummary();
         } else {
             // display error message
             formStatus.textContent = "Please correct the errors above";
             formStatus.style.color = "#c0392b"
         }
     });
+    // initialize the page when it loads
+    initializePage();
 });
-
-// initialize the page when it loads
-initializePage();
 
 // exports the method to be accessed by a node module
 module.exports = { getFormValues, isValidEventName, isValidRepName, isValidEmail, isValidRole };
-
-// initialize the page when it loads 
-function initializePage() {
-    displaySignupsTable();
-    showUpcomingEventsSummary();
-}
-
-// calculate role brakdown
-function calculateRoleBreakdown() {
-    const signups = loadSignupsFromLocalStorage();
-
-    const breakdown = {
-        sponsor: 0,
-        participant: 0,
-        organizer: 0
-
-    };
-
-    // count each 
-    signups.forEach(signup => {
-        if (breakdown.hasOwnProperty(signup.role)) {
-            breakdown[signup.role]++;
-        }
-    });
-
-    return breakdown;
-}
-
-// render the upcoming events summary
-function showUpcomingEventsSummary() {
-    const breakdown = calculateRoleBreakdown();
-
-    summarySection = document.createElement("section");
-    summarySection.id = "summary-section";
-    document.querySelector("main").appendChild(summarySection);
-
-
-    summarySection.innerHTML = `
-        <h2>Upcoming Event Summary</h2>
-        <div class="summary-stats">
-            <div class="stat-card">
-                <h3>Sponsors</h3>
-                <p class="stat-number">${breakdown.sponsor}</p>
-            </div>
-            <div class="stat-card">
-                <h3>Participants</h3>
-                <p class="stat-number">${breakdown.participant}</p>
-            </div>
-            <div class="stat-card">
-                <h3>Organizers</h3>
-                <p class="stat-number">${breakdown.organizer}</p>
-            </div>
-        </div>
-    `;
-}
