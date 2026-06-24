@@ -28,7 +28,7 @@
         <h1>Community Event Signup</h1>
         <p class="intro">Use this form to register PiXELL River Financial's participation in an upcoming community
             event.</p>
-            <!-- event signup form with validation -->
+        <!-- event signup form with validation -->
         <form action="" id="event-signup-form">
             <!-- event name input field -->
             <div class="form-group" id="group-event-name">
@@ -64,6 +64,25 @@
             <!-- display successful or fail message of the form submission -->
             <div id="form-status" role="status" aria-live="polite"></div>
         </form>
+        <br>
+        <!-- a table that show all the displays -->
+        <section id="signups-section">
+            <h2>All Signups</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Participant Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="signups-tbody">
+                    <!-- rows will be display over here -->
+                </tbody>
+            </table>
+        </section>
     </main>
 
     <!-- footer section that contain the copyright and links -->
