@@ -3,6 +3,23 @@ const form = document.getElementById("event-signup-form");
 const formStatus = document.getElementById("form-status");
 
 /**
+ * Save signups array to localStorage
+ * @param {Array} signups - contain array of signup objects
+ */
+function saveSignupsToLocalStorage(signups) {
+    localStorage.setItem("eventSignups", JSON.stringify(signups));
+}
+
+/**
+ * Load signups array to localStorage
+ */
+function loadSignupsFromLocalStorage() {
+    const data = localStorage.getItem("eventSignups");
+    return data ? JSON.parse(data) : [];
+}
+
+
+/**
  * Validate the event name field that is not empty
  * @param {string} eventName - to validate the event name
  * @returns {boolean} - True if event name is valid, otherwise false
@@ -72,6 +89,8 @@ function showError(fieldId) {
     }
 }
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("event-signup-form");
     const formStatus = document.getElementById("form-status");
@@ -80,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        
+
         clearErrors();
 
         let isValid = true;
@@ -113,9 +132,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (isValid) {
+            // get existing signups from localStorage
+            const signups =loadSignupsFromLocalStorage();
+
+            // add new signup to the array
+            signups.push(formValues);
+
+            // save updated array back to localStorage
+            saveSignupsToLocalStorage(signups);
+
             // display success message
             formStatus.textContent = "Form submitted successfully!";
             formStatus.style.color = "#2e7d32";
+
+            form.reset();
         } else {
             // display error message
             formStatus.textContent = "Please correct the errors above";
@@ -126,3 +156,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // exports the method to be accessed by a node module
 module.exports = { getFormValues, isValidEventName, isValidRepName, isValidEmail, isValidRole };
+
