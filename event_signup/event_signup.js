@@ -183,7 +183,7 @@ function showUpcomingEventsSummary() {
     document.querySelector("main").appendChild(summarySection);
 
     }
-    
+
     summarySection.innerHTML = `
         <h2>Upcoming Event Summary</h2>
         <div class="summary-stats">
@@ -276,4 +276,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // exports the method to be accessed by a node module
-module.exports = { getFormValues, isValidEventName, isValidRepName, isValidEmail, isValidRole };
+module.exports = { getFormValues, isValidEventName, isValidRepName, isValidEmail, isValidRole, displaySignupsTable, 
+    loadSignupsFromLocalStorage,
+ };
