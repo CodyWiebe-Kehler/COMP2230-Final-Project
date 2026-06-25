@@ -9,7 +9,7 @@ const fs = require("fs");
 const path = require("path");
 
 // reads the HTML the script thats being tested works with
-const html = fs.readFileSync(path.resolve(__dirname,"./template.html"), "utf-8")
+const html = fs.readFileSync(path.resolve(__dirname,"index.html"), "utf-8")
 
 //import methods we need for testing
 const {updateThemeColours} = require("./template.js"); //imports functions from our script
