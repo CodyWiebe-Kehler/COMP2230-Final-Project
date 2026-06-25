@@ -8,16 +8,18 @@
 const fs = require("fs");
 const path = require("path");
 // imports method from event_signup.js script
-const { 
-    getFormValues, 
-    isValidEventName, 
-    isValidEmail, 
-    isValidRepName, 
-    isValidRole, 
+const {
+    getFormValues,
+    isValidEventName,
+    isValidEmail,
+    isValidRepName,
+    isValidRole,
     displaySignupsTable,
-    loadSignupsFromLocalStorage, 
-    calculateRoleBreakdown, 
-    showUpcomingEventsSummary, deleteSignups } = require("./event_signup.js");
+    loadSignupsFromLocalStorage,
+    calculateRoleBreakdown,
+    showUpcomingEventsSummary,
+    deleteSignups
+} = require("./event_signup.js");
 const { table } = require("console");
 const { json } = require("stream/consumers");
 
@@ -270,7 +272,6 @@ describe("localStorage Integration Tests - Event Signup Table", () => {
 
     });
 });
-
 
 /**
  * Unit Test 1 - Stage Two

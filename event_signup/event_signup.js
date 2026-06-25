@@ -58,8 +58,6 @@ function displaySignupsTable() {
             deleteSignups(index);
         });
     });
-
-
 }
 
 /**
@@ -75,10 +73,10 @@ function deleteSignups(index) {
         saveSignupsToLocalStorage(signups);
 
         displaySignupsTable();
+
+        showUpcomingEventsSummary();
     }
 }
-
-
 
 /**
  * Validate the event name field that is not empty
@@ -150,7 +148,7 @@ function showError(fieldId) {
     }
 }
 
-// calculate role brakdown
+// calculate role breakdown
 function calculateRoleBreakdown() {
     const signups = loadSignupsFromLocalStorage();
 
