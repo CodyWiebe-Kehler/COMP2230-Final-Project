@@ -9,14 +9,13 @@ let messageInput;
 let alphanumericPlusRegex;
 let moneyRegex;
 
-let donations;
-
 document.addEventListener("DOMContentLoaded", (event) => {
     initialize()
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
 
+        donations = JSON.parse(localStorage.getItem("donationsEntries"));
         if (validateInputs()){
             console.log(collectFormData(nameInput,amountInput,dateInput,messageInput));
             //adds new donation to the local variable list
@@ -26,7 +25,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         localStorage.setItem("donationsEntries",JSON.stringify(donations))
 
         //update table to show newly added donation
-        displayEntries()
+        displayEntries(JSON.parse(localStorage.getItem("donationsEntries")))
     })
 
 
@@ -53,14 +52,15 @@ function initialize(){
     localEntries = JSON.parse(localStorage.getItem("donationsEntries"))
     if (localEntries){
         console.log("localstorage entries found")
-        donations = localEntries
     }else{
         console.log("localstorage entries not found")
-        donations = [];
+        localEntries = [];
     }
+    console.log(localEntries)
+    localStorage.setItem("donationsEntries",JSON.stringify(localEntries))
 
     //update donations table
-    displayEntries()
+    displayEntries(localEntries)
 
     //sets date input to todays date
     console.log(getToday())
@@ -176,47 +176,49 @@ function collectFormData(nameInput,amountInput,dateInput,messageInput){
 
 /**
  * updates donations table with entries to match current localstorage data
+ * @param {object} donationsJSON the JSON object from the donationsEntries localstorage
  */
-function displayEntries(){
+function displayEntries(donationsJSON){
     //clear old donation entries from screen
     clearEntries()
     let donationTable = document.getElementById("donations-table");
     let donationTableBody = donationTable.querySelector("tbody");
     //adds a table row for each donation entry in local storage
-    donations = JSON.parse(localStorage.getItem("donationsEntries"))
-    donations.forEach((donationEntry,index) => {
-        //console.log(donationEntry)
-        //creates new row element
-        let newRow = document.createElement("tr");
-        newRow.classList.add("donation-record");
-        //appends cells for each donation entry data value to row
-        newRow.appendChild(buildTableCell(donationEntry.name,""));
-        newRow.appendChild(buildTableCell("Amount: ", donationEntry.amount));
-        newRow.appendChild(buildTableCell("Date: ", donationEntry.date));
-        newRow.appendChild(buildTableCell("Comment: ", donationEntry.message));
+    if (donationsJSON){
+        donationsJSON.forEach((donationEntry,index) => {
+            //console.log(donationEntry)
+            //creates new row element
+            let newRow = document.createElement("tr");
+            newRow.classList.add("donation-record");
+            //appends cells for each donation entry data value to row
+            newRow.appendChild(buildTableCell(donationEntry.name,""));
+            newRow.appendChild(buildTableCell("Amount: ", donationEntry.amount));
+            newRow.appendChild(buildTableCell("Date: ", donationEntry.date));
+            newRow.appendChild(buildTableCell("Comment: ", donationEntry.message));
 
-        //creates and adds the remove element button
-        let buttonCell = document.createElement("td")
-        let removeButton = document.createElement("button");
-        removeButton.textContent = "Delete Record";
-        removeButton.addEventListener("click", (event) => {
-            /*
-            * removes the this element from the donations array at the index for this
-            * loop through the donation list, and upidates new spliced donations
-            * list to localstorage, then re displays the donation records table.
-            */
-            donations.splice(index,1);
-            localStorage.setItem("donationsEntries",JSON.stringify(donations));
-            displayEntries();
+            //creates and adds the remove element button
+            let buttonCell = document.createElement("td")
+            let removeButton = document.createElement("button");
+            removeButton.textContent = "Delete Record";
+            removeButton.addEventListener("click", (event) => {
+                /*
+                * removes the this element from the donations array at the index for this
+                * loop through the donation list, and upidates new spliced donations
+                * list to localstorage, then re displays the donation records table.
+                */
+                donationsJSON.splice(index,1);
+                localStorage.setItem("donationsEntries",JSON.stringify(donationsJSON));
+                displayEntries(donationsJSON);
+            })
+            buttonCell.appendChild(removeButton)
+            newRow.appendChild(buttonCell);
+
+            //appends row to table body
+            donationTableBody.appendChild(newRow);
         })
-        buttonCell.appendChild(removeButton)
-        newRow.appendChild(buttonCell);
-
-        //appends row to table body
-        donationTableBody.appendChild(newRow);
-    })
+    }
     //updates donations total display
-    document.getElementById("donations-total").textContent = `$${getDonationsTotal()}`
+    document.getElementById("donations-total").textContent = `$${getDonationsTotal(donationsJSON)}`
 }
 /**
  * Builds a HTMLTableCellElement with text content with the strongText tect first
@@ -246,14 +248,17 @@ function clearEntries(){
 }
 /**
  * returs the total amount of money from all donations on record
+ * @param {object} donationsJSON the JSON object from the donationsEntries localstorage
  * @returns total amount of money of all donations
  */
-function getDonationsTotal(){
+function getDonationsTotal(donationsJSON){
     let total = 0
-    donations = JSON.parse(localStorage.getItem("donationsEntries"));
-    donations.forEach(donation => {
-        total += +donation.amount;
-    })
+    if (donationsJSON){
+        donationsJSON.forEach(donation => {
+            total += +donation.amount;
+        })
+    }
+
     return total
 }
 
@@ -288,6 +293,18 @@ function getGlobalVariables(){
 }
 
 if (typeof module !== "undefined"){
-    module.exports = {initialize, getGlobalVariables ,collectFormData, validateInputs, displayError, clearErrorUI, getToday}
+    module.exports = {
+        initialize, 
+        getGlobalVariables, 
+        collectFormData, 
+        validateInputs, 
+        displayError, 
+        clearErrorUI, 
+        getToday,
+        displayEntries,
+        clearEntries,
+        buildTableCell,
+        getDonationsTotal
+    }
 }
 
