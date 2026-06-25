@@ -173,4 +173,5 @@ describe("tests the getToday() funciton",() => {
  * - displayEntries
  * - clearEntries
  * - buildCellTable
+ * - getDonationsTotal
  */

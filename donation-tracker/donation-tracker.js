@@ -215,6 +215,8 @@ function displayEntries(){
         //appends row to table body
         donationTableBody.appendChild(newRow);
     })
+    //updates donations total display
+    document.getElementById("donations-total").textContent = `$${getDonationsTotal()}`
 }
 /**
  * Builds a HTMLTableCellElement with text content with the strongText tect first
@@ -241,6 +243,18 @@ function clearEntries(){
     donationRows.forEach(tableRow => {
         tableRow.remove()
     })
+}
+/**
+ * returs the total amount of money from all donations on record
+ * @returns total amount of money of all donations
+ */
+function getDonationsTotal(){
+    let total = 0
+    donations = JSON.parse(localStorage.getItem("donationsEntries"));
+    donations.forEach(donation => {
+        total += +donation.amount;
+    })
+    return total
 }
 
 /**
