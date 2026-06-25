@@ -276,6 +276,15 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // exports the method to be accessed by a node module
-module.exports = { getFormValues, isValidEventName, isValidRepName, isValidEmail, isValidRole, displaySignupsTable, 
-    loadSignupsFromLocalStorage,
- };
+module.exports = { 
+    getFormValues, 
+    isValidEventName, 
+    isValidRepName, 
+    isValidEmail, 
+    isValidRole, 
+    displaySignupsTable, 
+    loadSignupsFromLocalStorage, 
+    calculateRoleBreakdown, 
+    showUpcomingEventsSummary, 
+    deleteSignups
+};
