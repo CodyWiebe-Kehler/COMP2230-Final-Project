@@ -24,10 +24,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
         //sets localstorage to match local variable
         localStorage.setItem("donationsEntries",JSON.stringify(donations))
+
+        //update table to show newly added donation
+        displayEntries()
     })
 
-    //update table to show newly added donation
-    displayEntries()
+
 })
 
 /**

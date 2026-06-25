@@ -67,10 +67,11 @@ form #submit-button{
 
 /*donation records table styling*/
 #donations-table-section{
-    background-color: var(--background-colour);
+    background-color: var(--text-on-colour);
     color: var(--text-colour);
 
     padding:25px;
+    margin: 25px;
     border-radius:12px;
     box-shadow:0 0 10px rgba(0,0,0,.1);
 }
