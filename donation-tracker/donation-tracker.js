@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
         //sets localstorage to match local variable
         localStorage.setItem("donationsEntries",JSON.stringify(donations))
     })
+
+    //update table to show newly added donation
+    displayEntries()
 })
 
 /**
@@ -53,6 +56,9 @@ function initialize(){
         console.log("localstorage entries not found")
         donations = [];
     }
+
+    //update donations table
+    displayEntries()
 
     //sets date input to todays date
     console.log(getToday())
@@ -164,6 +170,75 @@ function collectFormData(nameInput,amountInput,dateInput,messageInput){
     data.message = messageInput.value;
 
     return data;
+}
+
+/**
+ * updates donations table with entries to match current localstorage data
+ */
+function displayEntries(){
+    //clear old donation entries from screen
+    clearEntries()
+    let donationTable = document.getElementById("donations-table");
+    let donationTableBody = donationTable.querySelector("tbody");
+    //adds a table row for each donation entry in local storage
+    donations = JSON.parse(localStorage.getItem("donationsEntries"))
+    donations.forEach((donationEntry,index) => {
+        //console.log(donationEntry)
+        //creates new row element
+        let newRow = document.createElement("tr");
+        newRow.classList.add("donation-record");
+        //appends cells for each donation entry data value to row
+        newRow.appendChild(buildTableCell(donationEntry.name,""));
+        newRow.appendChild(buildTableCell("Amount: ", donationEntry.amount));
+        newRow.appendChild(buildTableCell("Date: ", donationEntry.date));
+        newRow.appendChild(buildTableCell("Comment: ", donationEntry.message));
+
+        //creates and adds the remove element button
+        let buttonCell = document.createElement("td")
+        let removeButton = document.createElement("button");
+        removeButton.textContent = "Delete Record";
+        removeButton.addEventListener("click", (event) => {
+            /*
+            * removes the this element from the donations array at the index for this
+            * loop through the donation list, and upidates new spliced donations
+            * list to localstorage, then re displays the donation records table.
+            */
+            donations.splice(index,1);
+            localStorage.setItem("donationsEntries",JSON.stringify(donations));
+            displayEntries();
+        })
+        buttonCell.appendChild(removeButton)
+        newRow.appendChild(buttonCell);
+
+        //appends row to table body
+        donationTableBody.appendChild(newRow);
+    })
+}
+/**
+ * Builds a HTMLTableCellElement with text content with the strongText tect first
+ * in a strong tag, and followed by the normal text.
+ * @param {string} strongText The text you want to be set as strong text at the
+ *  front of the cells text content.
+ * @param {string} text the normal text content for the cell which follows the 
+ * strong text.
+ * @returns {HTMLTableCellElement} a cell element with text content based on
+ *  given string inputs
+ */
+function buildTableCell(strongText,text){
+    //creates individual elements with values
+    let cell = document.createElement("td");
+    //sets inner html to appropriate text string including strong tag
+    cell.innerHTML = `<strong>${strongText}</strong>${text}`
+    return cell
+}
+/**
+ * clears all donation entry table rows from the donations table 
+ */
+function clearEntries(){
+    let donationRows = [...document.getElementsByClassName("donation-record")];
+    donationRows.forEach(tableRow => {
+        tableRow.remove()
+    })
 }
 
 /**

@@ -167,3 +167,10 @@ describe("tests the getToday() funciton",() => {
         expect(result.getDay()).toBe(expected.getDay());
     })
 })
+
+/**
+ * functions yet to test:
+ * - displayEntries
+ * - clearEntries
+ * - buildCellTable
+ */
