@@ -187,14 +187,18 @@ if (typeof module !== "undefined") {
 
 }
 
-const themeBtn = document.getElementById("themeBtn");
+function renderTotalHours() {
 
-themeBtn.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
+    const totalDiv = document.getElementById("total-hours");
 
-    if(document.body.classList.contains("dark-mode")){
-        themeBtn.textContent = "☀️ Light Mode";
-    }else{
-        themeBtn.textContent = "🌙 Dark Mode";
-    }
-});
+    const total = entries.reduce((sum, entry) => {
+        return sum + Number(entry.hours);
+    }, 0);
+
+    totalDiv.innerHTML = `<h3>${total} hours volunteered</h3>`;
+}
+
+window.onload = () => {
+    renderEntries();
+    renderTotalHours();
+};
