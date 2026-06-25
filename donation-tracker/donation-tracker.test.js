@@ -1,8 +1,8 @@
 /**
- * jest test script copied from template
+ * jest tests for the donation-tracker.js script and associated donation tracker webpage
  * 
  * @author Cody Wiebe-Kehler
- * @version 1.0.1
+ * @version 1.0.2
  * 
  */
 
@@ -36,6 +36,7 @@ beforeEach(() => {
     // ensures localStorage reset before each test
     window.localStorage.clear()
 })
+
 /**
  * tests the initialize function
  * -- 1. DOM elements are gotten and stored
@@ -181,6 +182,11 @@ describe("tests the getToday() funciton",() => {
     })
 })
 
+/**
+ * tests the displayEntries function
+ * -- 1. ensures correct formatting of HTML element added to table body based on input JSON
+ * -- 2. tests that the function handles null input properly
+ */
 describe("tests the displayEntries() function", () => {
     test("tests that correctly formatted HTML element is added to table body based on input JSON", () => {
         //arrange
@@ -210,7 +216,10 @@ describe("tests the displayEntries() function", () => {
         expect(tableBodyReal).toEqual(tableBodyExpected)
     })
 })
-
+/**
+ * tests the clearEntries function
+ * -- 1. tests that HTML table body is clear after function is run
+ */
 describe("tests the clearEntries() function", () => {
     test("tests that clearEntries() does actually remove any existing objects from HTML table body", () => {
         //arrange
@@ -232,6 +241,10 @@ describe("tests the clearEntries() function", () => {
     })
 })
 
+/**
+ * tests the buildCellTable helper function
+ * -- 1. ensures output HTML object is correct based on function input
+ */
 describe("tests the buildCellTable helper function", () => {
     test("test that correct HTML object output is returned based on function input", () => {
         //arrange, act
@@ -241,7 +254,13 @@ describe("tests the buildCellTable helper function", () => {
         expect(cellActual).toEqual(cellExpected)
     })
 })
-
+/**
+ * tests the getDonationsTotal function
+ * -- 1. ensures output is correct based on input data with single donation object
+ * -- 2. ensures output is correct based on input data with multiple donation object
+ * -- 3. ensures function returns 0 with null input
+ * -- 4. ensures function returns 0 with empty list input
+ */
 describe("tests the getDonationsTotal function", () => {
     test("test that output matches input data", () => {
         //arrange
@@ -284,6 +303,15 @@ describe("tests the getDonationsTotal function", () => {
     test("test that function returns expected with null input", () => {
         //arrange
         let donationsEntriesData = null;
+        //act
+        let totalActual = getDonationsTotal(donationsEntriesData)
+        //assert
+        let totalExpected = 0
+        expect(totalActual).toBe(totalExpected)
+    })
+    test("test that function returns expected with empty list input", () => {
+        //arrange
+        let donationsEntriesData = [];
         //act
         let totalActual = getDonationsTotal(donationsEntriesData)
         //assert
