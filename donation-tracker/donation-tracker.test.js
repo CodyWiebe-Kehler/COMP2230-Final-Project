@@ -1,8 +1,8 @@
 /**
- * jest test script copied from template
+ * jest tests for the donation-tracker.js script and associated donation tracker webpage
  * 
  * @author Cody Wiebe-Kehler
- * @version 1.0.1
+ * @version 1.0.2
  * 
  */
 
@@ -13,7 +13,18 @@ const path = require("path");
 const html = fs.readFileSync(path.resolve(__dirname,"./donation-tracker.html"), "utf-8")
 
 //import methods we need for testing
-const {initialize, getGlobalVariables, collectFormData, validateInputs, displayError, clearErrorUI, getToday} = require("./donation-tracker.js"); //imports functions from our script
+const {
+    initialize, 
+    getGlobalVariables, 
+    collectFormData, 
+    validateInputs, 
+    displayError, 
+    clearErrorUI, 
+    getToday, 
+    displayEntries,
+    clearEntries,
+    buildTableCell,
+    getDonationsTotal} = require("./donation-tracker.js"); //imports functions from our script
 const { testEnvironment } = require("../jest.config.js"); //imports dependancy functions from jest.config.js
 const { addUncaughtExceptionCaptureCallback } = require("process");
 const { get } = require("http");
@@ -22,7 +33,10 @@ const { get } = require("http");
 beforeEach(() => {
     // mount the HTML content to the virtual DOM
     document.documentElement.innerHTML = html.toString();
+    // ensures localStorage reset before each test
+    window.localStorage.clear()
 })
+
 /**
  * tests the initialize function
  * -- 1. DOM elements are gotten and stored
@@ -165,5 +179,143 @@ describe("tests the getToday() funciton",() => {
         expect(result.getFullYear()).toBe(expected.getFullYear());
         expect(result.getMonth()).toBe(expected.getMonth());
         expect(result.getDay()).toBe(expected.getDay());
+    })
+})
+
+/**
+ * tests the displayEntries function
+ * -- 1. ensures correct formatting of HTML element added to table body based on input JSON
+ * -- 2. tests that the function handles null input properly
+ */
+describe("tests the displayEntries() function", () => {
+    test("tests that correctly formatted HTML element is added to table body based on input JSON", () => {
+        //arrange
+        let donationsEntriesData = [
+            {
+                amount: "1",
+                date: "2026-06-25T00:00:00.000Z",
+                message: "test",
+                name: "test"
+            }
+        ]
+        //act
+        displayEntries(donationsEntriesData)
+        //assert
+        let tableBodyReal = document.getElementById("donations-table").querySelector("tbody").innerHTML.trim();
+        let tableBodyExpected = `<tr class=\"donation-record\"><td><strong>test</strong></td><td><strong>Amount: </strong>1</td><td><strong>Date: </strong>2026-06-25T00:00:00.000Z</td><td><strong>Comment: </strong>test</td><td><button>Delete Record</button></td></tr>`
+        expect(tableBodyReal).toEqual(tableBodyExpected)
+    })
+    test("tests that function can handle null input, aka nonexistant localstorage value", () => {
+        //arrange
+        let donationsEntriesData = null;
+        //act
+        displayEntries(donationsEntriesData)
+        //assert
+        let tableBodyReal = document.getElementById("donations-table").querySelector("tbody").innerHTML.trim();
+        let tableBodyExpected = ``
+        expect(tableBodyReal).toEqual(tableBodyExpected)
+    })
+})
+/**
+ * tests the clearEntries function
+ * -- 1. tests that HTML table body is clear after function is run
+ */
+describe("tests the clearEntries() function", () => {
+    test("tests that clearEntries() does actually remove any existing objects from HTML table body", () => {
+        //arrange
+        let donationsEntriesData = [
+            {
+                amount: "1",
+                date: "2026-06-25T00:00:00.000Z",
+                message: "test",
+                name: "test"
+            }
+        ]
+        displayEntries(donationsEntriesData);
+        //act 
+        clearEntries()
+        //assert
+        let tableBodyActual = document.getElementById("donations-table").querySelector("tbody").innerHTML.trim();
+        let tableBodyExpected = ``
+        expect(tableBodyActual).toEqual(tableBodyExpected)
+    })
+})
+
+/**
+ * tests the buildCellTable helper function
+ * -- 1. ensures output HTML object is correct based on function input
+ */
+describe("tests the buildCellTable helper function", () => {
+    test("test that correct HTML object output is returned based on function input", () => {
+        //arrange, act
+        let cellActual = buildTableCell("Test Strong","test normal").outerHTML
+        //assert
+        let cellExpected = `<td><strong>Test Strong</strong>test normal</td>`
+        expect(cellActual).toEqual(cellExpected)
+    })
+})
+/**
+ * tests the getDonationsTotal function
+ * -- 1. ensures output is correct based on input data with single donation object
+ * -- 2. ensures output is correct based on input data with multiple donation object
+ * -- 3. ensures function returns 0 with null input
+ * -- 4. ensures function returns 0 with empty list input
+ */
+describe("tests the getDonationsTotal function", () => {
+    test("test that output matches input data", () => {
+        //arrange
+        let donationsEntriesData = [
+            {
+                amount: "1",
+                date: "2026-06-25T00:00:00.000Z",
+                message: "test",
+                name: "test"
+            }
+        ]
+        //act
+        let totalActual = getDonationsTotal(donationsEntriesData)
+        //assert
+        let totalExpected = 1
+        expect(totalActual).toBe(totalExpected)
+    })
+    test("test that output matches input data with multiple donations", () => {
+        //arrange
+        let donationsEntriesData = [
+            {
+                amount: "1",
+                date: "2026-06-25T00:00:00.000Z",
+                message: "test",
+                name: "test"
+            },
+            {
+                amount: "1",
+                date: "2026-06-25T00:00:00.000Z",
+                message: "test",
+                name: "test"
+            },
+        ]
+        //act
+        let totalActual = getDonationsTotal(donationsEntriesData)
+        //assert
+        let totalExpected = 2
+        expect(totalActual).toBe(totalExpected)
+    })
+    test("test that function returns expected with null input", () => {
+        //arrange
+        let donationsEntriesData = null;
+        //act
+        let totalActual = getDonationsTotal(donationsEntriesData)
+        //assert
+        let totalExpected = 0
+        expect(totalActual).toBe(totalExpected)
+    })
+    test("test that function returns expected with empty list input", () => {
+        //arrange
+        let donationsEntriesData = [];
+        //act
+        let totalActual = getDonationsTotal(donationsEntriesData)
+        //assert
+        let totalExpected = 0
+        expect(totalActual).toBe(totalExpected)
     })
 })

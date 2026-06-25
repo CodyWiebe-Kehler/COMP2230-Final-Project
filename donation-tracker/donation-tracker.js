@@ -15,10 +15,20 @@ document.addEventListener("DOMContentLoaded", (event) => {
     form.addEventListener("submit", (event) => {
         event.preventDefault();
 
+        donations = JSON.parse(localStorage.getItem("donationsEntries"));
         if (validateInputs()){
             console.log(collectFormData(nameInput,amountInput,dateInput,messageInput));
+            //adds new donation to the local variable list
+            donations.push(collectFormData(nameInput,amountInput,dateInput,messageInput));
         }
+        //sets localstorage to match local variable
+        localStorage.setItem("donationsEntries",JSON.stringify(donations))
+
+        //update table to show newly added donation
+        displayEntries(JSON.parse(localStorage.getItem("donationsEntries")))
     })
+
+
 })
 
 /**
@@ -37,6 +47,20 @@ function initialize(){
     //Regex
     alphanumericPlusRegex = /^[a-zA-Z0-9!@#\$%\^\&\*()_+\-=\[\]{};':"\\| ,.<>\/?]+$/;
     moneyRegex = /^\d{1,5}$|(?=^.{1,5}$)^\d+\.\d{0,2}$/;
+
+    //Retrieves donations log from localStorage
+    localEntries = JSON.parse(localStorage.getItem("donationsEntries"))
+    if (localEntries){
+        console.log("localstorage entries found")
+    }else{
+        console.log("localstorage entries not found")
+        localEntries = [];
+    }
+    console.log(localEntries)
+    localStorage.setItem("donationsEntries",JSON.stringify(localEntries))
+
+    //update donations table
+    displayEntries(localEntries)
 
     //sets date input to todays date
     console.log(getToday())
@@ -151,6 +175,94 @@ function collectFormData(nameInput,amountInput,dateInput,messageInput){
 }
 
 /**
+ * updates donations table with entries to match current localstorage data
+ * @param {object} donationsJSON the JSON object from the donationsEntries localstorage
+ */
+function displayEntries(donationsJSON){
+    //clear old donation entries from screen
+    clearEntries()
+    let donationTable = document.getElementById("donations-table");
+    let donationTableBody = donationTable.querySelector("tbody");
+    //adds a table row for each donation entry in local storage
+    if (donationsJSON){
+        donationsJSON.forEach((donationEntry,index) => {
+            //console.log(donationEntry)
+            //creates new row element
+            let newRow = document.createElement("tr");
+            newRow.classList.add("donation-record");
+            //appends cells for each donation entry data value to row
+            newRow.appendChild(buildTableCell(donationEntry.name,""));
+            newRow.appendChild(buildTableCell("Amount: ", donationEntry.amount));
+            newRow.appendChild(buildTableCell("Date: ", donationEntry.date));
+            newRow.appendChild(buildTableCell("Comment: ", donationEntry.message));
+
+            //creates and adds the remove element button
+            let buttonCell = document.createElement("td")
+            let removeButton = document.createElement("button");
+            removeButton.textContent = "Delete Record";
+            removeButton.addEventListener("click", (event) => {
+                /*
+                * removes the this element from the donations array at the index for this
+                * loop through the donation list, and upidates new spliced donations
+                * list to localstorage, then re displays the donation records table.
+                */
+                donationsJSON.splice(index,1);
+                localStorage.setItem("donationsEntries",JSON.stringify(donationsJSON));
+                displayEntries(donationsJSON);
+            })
+            buttonCell.appendChild(removeButton)
+            newRow.appendChild(buttonCell);
+
+            //appends row to table body
+            donationTableBody.appendChild(newRow);
+        })
+    }
+    //updates donations total display
+    document.getElementById("donations-total").textContent = `$${getDonationsTotal(donationsJSON)}`
+}
+/**
+ * Builds a HTMLTableCellElement with text content with the strongText tect first
+ * in a strong tag, and followed by the normal text.
+ * @param {string} strongText The text you want to be set as strong text at the
+ *  front of the cells text content.
+ * @param {string} text the normal text content for the cell which follows the 
+ * strong text.
+ * @returns {HTMLTableCellElement} a cell element with text content based on
+ *  given string inputs
+ */
+function buildTableCell(strongText,text){
+    //creates individual elements with values
+    let cell = document.createElement("td");
+    //sets inner html to appropriate text string including strong tag
+    cell.innerHTML = `<strong>${strongText}</strong>${text}`
+    return cell
+}
+/**
+ * clears all donation entry table rows from the donations table 
+ */
+function clearEntries(){
+    let donationRows = [...document.getElementsByClassName("donation-record")];
+    donationRows.forEach(tableRow => {
+        tableRow.remove()
+    })
+}
+/**
+ * returs the total amount of money from all donations on record
+ * @param {object} donationsJSON the JSON object from the donationsEntries localstorage
+ * @returns total amount of money of all donations
+ */
+function getDonationsTotal(donationsJSON){
+    let total = 0
+    if (donationsJSON){
+        donationsJSON.forEach(donation => {
+            total += +donation.amount;
+        })
+    }
+
+    return total
+}
+
+/**
  * returns the date object for todays date, with timezone adjusted hours, at minute 0, second 0
  * @returns {Date} date object with todays year, month, and day, and hours, minutes, seconds, and milliseconds set to 0
  */
@@ -181,6 +293,18 @@ function getGlobalVariables(){
 }
 
 if (typeof module !== "undefined"){
-    module.exports = {initialize, getGlobalVariables ,collectFormData, validateInputs, displayError, clearErrorUI, getToday}
+    module.exports = {
+        initialize, 
+        getGlobalVariables, 
+        collectFormData, 
+        validateInputs, 
+        displayError, 
+        clearErrorUI, 
+        getToday,
+        displayEntries,
+        clearEntries,
+        buildTableCell,
+        getDonationsTotal
+    }
 }
 

@@ -1,5 +1,13 @@
 @import "/template.css";
 /*form input arrangements*/
+#donation-form-section{
+    margin-top:30px;
+    background-color: var(--background-colour);
+    color: var(--text-colour);
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
 form{
     display: flex;
     flex-direction: column;
@@ -42,6 +50,7 @@ form #submit-button{
 /*individual input adjustments*/
 #submit-button{
     margin-top: 10px;
+    color: #ddd;
 }
 #message-input{
     resize: none;
@@ -56,3 +65,40 @@ form #submit-button{
     background-color: var(--background-colour);
 }
 
+/*donation records table styling*/
+#donations-table-section{
+    background-color: var(--text-on-colour);
+    color: var(--text-colour);
+
+    padding:25px;
+    margin: 25px;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+#donations-table{
+    width: 100%;
+    background-color: var(--text-on-colour);
+
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+#donations-table tr:not(.visually-hidden){
+    display: flex;
+    flex-direction: column;
+
+    padding:15px;
+    border-bottom:1px solid #ddd;
+}
+
+
+/*hides the table header from the screen, while remaining technically on the
+page for the sake of accessibility*/
+.visually-hidden{
+    display: block;
+    font-size: 0px;
+    padding: 0;
+    border: 0px;
+    width: 0px;
+    height: 0px;
+}

@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PiXELL River Financial - Donation Tracker</title>
-    <link rel="stylesheet" href="/template.css">
-    <link rel="stylesheet" href="/donation-tracker/donation-tracker.css">
+    <link rel="stylesheet" href="../template.css">
+    <link rel="stylesheet" href="donation-tracker.css">
 </head>
 
 <body>
@@ -16,13 +16,13 @@
     </header>
     <nav class="site-nav">
         <ul class="nav-list">
-            <li><a href="/donation-tracker/donation-tracker.html">Donation Tracker</a></li>
-            <li><a href="/volunteer_tracker/volunteer_tracker.html">Volunteer Hours</a></li>
-            <li><a href="/event_signup/event_signup.html">Event signup</a></li>
+            <li><a href="../donation-tracker/donation-tracker.html">Donation Tracker</a></li>
+            <li><a href="../volunteer_tracker/volunteer_tracker.html">Volunteer Hours</a></li>
+            <li><a href="../event_signup/event_signup.html">Event signup</a></li>
         </ul>
     </nav>
     <main>
-        <section>
+        <section id="donation-form-section">
             <form id="donation-tracker-form">
                 <h2 id="donation-form-title">Donation Form</h2>
                 <fieldset id="simple-input-fieldset">
@@ -46,8 +46,35 @@
                     </div>
                     <input type="submit" name="submit-button" id="submit-button" value="Make Donation">
                 </fieldset>
-                
             </form>
+        </section>
+        <section id="donations-table-section">
+            <h2>Donation Records</h2>
+            <h3 style="display: inline;">Total Donations:</h3>
+            <h1 style="display: inline;" id="donations-total">$100000</h1>
+            <table id="donations-table">
+                <thead class="visually-hidden">
+                    <tr class="visually-hidden">
+                        <td class="visually-hidden">Charity Name</td>
+                        <td class="visually-hidden">Donation Amount</td>
+                        <td class="visually-hidden">Date</td>
+                        <td class="visually-hidden">Comment</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="donation-record">
+                        <td><strong>Example Name</strong></td>
+                        <td><strong>Amount:</strong> $999</td>
+                        <td><strong>Date:</strong> January -41</td>
+                        <td><strong>Comment:</strong> This is an example of the HTML structure for a donation recrod table row</td>
+                        <td><button>Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                
+                <p><strong></strong></p>
+            </div>
         </section>
     </main>
     <footer class="site-footer">
@@ -58,8 +85,8 @@
             <a href="#">Contact Us</a>
         </nav>
     </footer>
-    <script src="/template.js"></script>
-    <script src="/donation-tracker/donation-tracker.js"></script>
+    <script src="../template.js"></script>
+    <script src="donation-tracker.js"></script>
 </body>
 
 </html>
