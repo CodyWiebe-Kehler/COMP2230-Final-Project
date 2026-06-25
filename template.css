@@ -195,6 +195,10 @@ button:hover{
     color:white;
 }
 
+.menu-btn{
+    display: none;
+}
+
 /* RESPONSIVE */
 @media (max-width:768px){
     .nav-list{
@@ -207,6 +211,9 @@ button:hover{
     .footer-links{
         flex-direction: column;
         gap: 10px;
+    }
+    .menu-btn{
+        display: block;
     }
 }
 
