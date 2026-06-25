@@ -186,3 +186,19 @@ if (typeof module !== "undefined") {
     };
 
 }
+
+function renderTotalHours() {
+
+    const totalDiv = document.getElementById("total-hours");
+
+    const total = entries.reduce((sum, entry) => {
+        return sum + Number(entry.hours);
+    }, 0);
+
+    totalDiv.innerHTML = `<h3>${total} hours volunteered</h3>`;
+}
+
+window.onload = () => {
+    renderEntries();
+    renderTotalHours();
+};
