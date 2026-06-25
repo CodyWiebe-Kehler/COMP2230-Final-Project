@@ -139,5 +139,8 @@ window.addEventListener("resize", () => {
     }
 });
 
-module.exports = {updateThemeColours}
 
+//stops export when loading webpage under normal circumstances without jest environment
+if (typeof module !== "undefined") {
+    module.exports = {updateThemeColours}
+}

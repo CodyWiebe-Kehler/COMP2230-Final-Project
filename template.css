@@ -2,7 +2,7 @@
     /*variables allow easy site wide changing of colour scheme and fonts*/
     --dark-background-colour: #2D2D30;
     --dark-text-colour: white;
-    --dark-accent-colour:#27AAE0;
+    --dark-accent-colour:#2B3891;
     --dark-text-on-colour:#252526; /*slightly darker than background*/
 
     --light-background-colour: #F5F5F5; /*very slightly off white for eye strain*/
@@ -195,6 +195,10 @@ button:hover{
     color:white;
 }
 
+.menu-btn{
+    display: none;
+}
+
 /* RESPONSIVE */
 @media (max-width:768px){
     .nav-list{
@@ -207,6 +211,9 @@ button:hover{
     .footer-links{
         flex-direction: column;
         gap: 10px;
+    }
+    .menu-btn{
+        display: block;
     }
 }
 
