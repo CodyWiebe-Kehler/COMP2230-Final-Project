@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiXELL River Financial - Donation Tracker</title>
+    <link rel="stylesheet" href="../template.css">
+    <link rel="stylesheet" href="donation-tracker.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <h1>PRF: Donation Tracker</h1>
+        <p>This tool will help us monitor and manage donations</p>
+    </header>
+    <nav class="site-nav">
+        <ul class="nav-list">
+            <li><a href="donation-tracker.html">Donation Tracker</a></li>
+            <li><a href="../volunteer_tracker/volunteer_tracker.html">Volunteer Hours</a></li>
+            <li><a href="../event_signup/event_signup.html">Event signup</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="donation-form-section">
+            <form id="donation-tracker-form">
+                <h2 id="donation-form-title">Donation Form</h2>
+                <fieldset id="simple-input-fieldset">
+                    <div class="single-input-container" id="charity-name-input-container">
+                        <label for="charity-name-input">Chosen Charity</label>
+                        <input type="text" id="charity-name-input" name="charity-name-input">
+                    </div>
+                    <div class="single-input-container" id="amount-input-container">
+                        <label for="">Amount (USD):</label>
+                        <input type="number" id="amount-input" name="amount-input" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="single-input-container" id="date-input-container">
+                        <label for="date-input">Donation Date</label>
+                        <input type="date" id="date-input" name="date-input" readonly>
+                    </div>
+                </fieldset>
+                <fieldset id="centered-input-fieldset">
+                    <div class="single-input-container" id="message-input-container">
+                        <label for="message-input">Donation Message</label>
+                        <textarea name="message-input" id="message-input" rows="15"></textarea>
+                    </div>
+                    <input type="submit" name="submit-button" id="submit-button" value="Make Donation">
+                </fieldset>
+            </form>
+        </section>
+        <section id="donations-table-section">
+            <h2>Donation Records</h2>
+            <h3 style="display: inline;">Total Donations:</h3>
+            <h1 style="display: inline;" id="donations-total">$100000</h1>
+            <table id="donations-table">
+                <thead class="visually-hidden">
+                    <tr class="visually-hidden">
+                        <td class="visually-hidden">Charity Name</td>
+                        <td class="visually-hidden">Donation Amount</td>
+                        <td class="visually-hidden">Date</td>
+                        <td class="visually-hidden">Comment</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="donation-record">
+                        <td><strong>Example Name</strong></td>
+                        <td><strong>Amount:</strong> $999</td>
+                        <td><strong>Date:</strong> January -41</td>
+                        <td><strong>Comment:</strong> This is an example of the HTML structure for a donation recrod table row</td>
+                        <td><button>Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                
+                <p><strong></strong></p>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <p class="footer-copy">&copy; 2026 PiXELL River Financial. All rights reserved.</p>
+        <nav class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Accessibility</a>
+            <a href="#">Contact Us</a>
+        </nav>
+    </footer>
+    <script src="../template.js"></script>
+    <script src="donation-tracker.js"></script>
+</body>
+
+</html>
